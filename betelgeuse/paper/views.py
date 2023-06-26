@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
 # Create your views here.
 
-def home(request):
-    return HttpResponse("<h1>Главная</h1>")
+from .models import *
+
+
+def index(request):
+    papers = Paper.objects.all()
+    return render(request, "paper/index.html", {"papers": papers})
 
 
 def about(request):
