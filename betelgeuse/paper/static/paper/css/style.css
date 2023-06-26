@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.content {
+    padding: 20px;
+}
+
+footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.card_container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
+/* Стили карточки */
+.card {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    padding: 8px 15px 20px 30px;
+    margin: 10px;
+    width: auto;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.codeKP {
+    font-size: 16px;
+    color: gray;
+}
+
+.subtitle {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.link {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: blue;
+}
+
+.image {
+    margin-top: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+.button {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+}
