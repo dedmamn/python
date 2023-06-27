@@ -10,9 +10,9 @@
         {% for p in papers %}
         <div class="card">
             <h1 class="title">{{p.title}}</h1>
-            <h2 class="subtitle">{{ p.get_subtitles_as_string }}</h2>
             <p class="code">{{p.code}}</p>
-            <img class="image" src="{{ p.image.url }}" alt="Изображение">
+            <h2 class="subtitle">{{ p.get_subtitles_as_string }}</h2>
+            <img class="image" src="{{ p.get_latest_image.color_positive.url }}" alt="Изображение">
             <a class="button" href="#">Button</a>
         </div>
         {% endfor %}

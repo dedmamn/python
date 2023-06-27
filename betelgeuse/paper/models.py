@@ -87,13 +87,16 @@ class Paper(models.Model):
     year_end = models.PositiveIntegerField(default=None, blank=True, null=True)
     url = models.URLField(default=None, blank=True, null=True)
     subtitles = models.ManyToManyField(Subtitle, blank=True)
-    images = models.ManyToManyField(Image)
+    images = models.ManyToManyField(Image, related_name="paper_images")
     authors = models.ManyToManyField(Author)
     additional = models.OneToOneField(Additional, on_delete=models.CASCADE, blank=True, null=True)
     himinfo = models.OneToOneField(HimInfo, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.code
+
+    def get_latest_image(self):
+        return self.images.latest("id")
 
     def get_subtitles_as_string(self):
         return ", ".join([subtitle.name for subtitle in self.subtitles.all()])
