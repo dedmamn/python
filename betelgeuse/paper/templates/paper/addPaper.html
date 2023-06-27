@@ -1,0 +1,10 @@
+{% extends 'paper/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<form action="/addPaper" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock content %}
