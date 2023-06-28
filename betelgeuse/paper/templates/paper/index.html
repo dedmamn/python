@@ -12,7 +12,7 @@
             <h1 class="title">{{p.title}}</h1>
             <p class="code">{{p.code}}</p>
             <h2 class="subtitle">{{ p.get_subtitles_as_string }}</h2>
-            <img class="image" src="{{ p.get_latest_image.color_positive.url }}" alt="Изображение">
+            <img class="image" src="{{ p.get_latest_image.url }}" alt="Изображение">
             <a class="button" href="#">Button</a>
         </div>
         {% endfor %}

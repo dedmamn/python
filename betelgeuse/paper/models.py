@@ -10,12 +10,6 @@ class Subtitle(models.Model):
         return self.name
 
 
-class Image(models.Model):
-    bw_positive = models.ImageField()
-    color_positive = models.ImageField()
-    date_capture = models.DateField()
-
-
 class Report(models.Model):
     date = models.DateField()
     file = models.FileField()
@@ -87,7 +81,6 @@ class Paper(models.Model):
     year_end = models.PositiveIntegerField(default=None, blank=True, null=True)
     url = models.URLField(default=None, blank=True, null=True)
     subtitles = models.ManyToManyField(Subtitle, blank=True)
-    images = models.ManyToManyField(Image, related_name="paper_images")
     authors = models.ManyToManyField(Author)
     additional = models.OneToOneField(Additional, on_delete=models.CASCADE, blank=True, null=True)
     himinfo = models.OneToOneField(HimInfo, on_delete=models.CASCADE, blank=True, null=True, default=None)
@@ -96,7 +89,19 @@ class Paper(models.Model):
         return self.code
 
     def get_latest_image(self):
-        return self.images.latest("id")
+        latest_paper_image = self.image_set.order_by("-date_capture").first()
+        if latest_paper_image:
+            return latest_paper_image.color_positive
 
     def get_subtitles_as_string(self):
         return ", ".join([subtitle.name for subtitle in self.subtitles.all()])
+
+
+class Image(models.Model):
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="image_set")
+    bw_positive = models.ImageField()
+    color_positive = models.ImageField()
+    date_capture = models.DateField()
+
+    def __str__(self):
+        return f"Image {self.id}"
