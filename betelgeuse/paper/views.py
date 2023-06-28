@@ -19,23 +19,11 @@ def addPaper(request):
         form = AddPaperForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            # obj = Paper()
-            # obj.code = form.cleaned_data["code"]
-            # obj.title = form.cleaned_data["title"]
-            # obj.year_start = form.cleaned_data["year_start"]
-            # obj.year_end = form.cleaned_data["year_end"]
-            # obj.url = form.cleaned_data["url"]
-            # obj.subtitles = form.cleaned_data["subtitles"]
-            # obj.images = form.cleaned_data["images"]
-            # obj.authors = form.cleaned_data["authors"]
-            # obj.additional = form.cleaned_data["additional"]
-            # obj.himinfo = form.cleaned_data["himinfo"]
-            # obj.save()
-
+            form.save()
             return HttpResponseRedirect("/")
+        else:
+            form = AddPaperForm()
+        return render(request, "paper/addPaper.html", {"form": form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
