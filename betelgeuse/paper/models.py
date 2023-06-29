@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from .tools import image_upload_path
+from .tools import *
 
 # Create your models here.
 
@@ -25,11 +25,14 @@ class Additional(models.Model):
     thickness = models.PositiveIntegerField()
     ph = models.DecimalField(max_digits=5, decimal_places=3)
 
+    def __str__(self):
+        return f"Additional - {self.id}"
+
 
 class HimInfo(models.Model):
-    microscopy = models.ImageField(blank=True, null=True)
-    uf = models.ImageField(blank=True, null=True)
-    express_test = models.ImageField(blank=True, null=True)
+    microscopy = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
+    uf = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
+    express_test = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
 
 
 class Paper(models.Model):
@@ -68,7 +71,7 @@ class Image(models.Model):
 class Report(models.Model):
     additional = models.ForeignKey(Additional, on_delete=models.CASCADE, related_name="report_set")
     date = models.DateField()
-    file = models.FileField()
+    file = models.FileField(upload_to=report_upload_path)
 
 
 class Material(models.Model):
@@ -80,8 +83,8 @@ class Material(models.Model):
 
 class Structure(models.Model):
     him_info = models.ForeignKey(HimInfo, on_delete=models.CASCADE, related_name="structure")
-    hertzberg = models.ImageField(blank=True, null=True)
-    graf_c = models.ImageField(blank=True, null=True)
+    hertzberg = models.ImageField(upload_to=structure_upload_path, blank=True, null=True)
+    graf_c = models.ImageField(upload_to=structure_upload_path, blank=True, null=True)
     discription = models.ManyToManyField(Material, blank=True)
 
 
