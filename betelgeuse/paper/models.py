@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils import timezone
+from .tools import image_upload_path
 
 # Create your models here.
 
@@ -56,9 +57,9 @@ class Paper(models.Model):
 
 class Image(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="image_set")
-    bw_positive = models.ImageField()
-    color_positive = models.ImageField()
-    date_capture = models.DateField()
+    bw_positive = models.ImageField(upload_to=image_upload_path)
+    color_positive = models.ImageField(upload_to=image_upload_path)
+    date_capture = models.DateField(default=timezone.now)
 
     def __str__(self):
         return f"Image {self.id}"
