@@ -2,9 +2,8 @@ from django.db import models
 from django.utils import timezone
 from .tools import *
 
+
 # Create your models here.
-
-
 class Subtitle(models.Model):
     name = models.CharField(max_length=50)
 
@@ -19,17 +18,7 @@ class Author(models.Model):
         return self.name
 
 
-class Additional(models.Model):
-    passepartout = models.BooleanField()
-    year_restoration = models.PositiveIntegerField()
-    thickness = models.PositiveIntegerField()
-    ph = models.DecimalField(max_digits=5, decimal_places=3)
-
-    def __str__(self):
-        return f"Additional - {self.id}"
-
-
-class HimInfo(models.Model):
+class HimImage(models.Model):
     microscopy = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
     uf = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
     express_test = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
@@ -43,8 +32,11 @@ class Paper(models.Model):
     url = models.URLField(default=None, blank=True, null=True)
     subtitles = models.ManyToManyField(Subtitle, default=None, blank=True)
     authors = models.ManyToManyField(Author)
-    additional = models.OneToOneField(Additional, on_delete=models.CASCADE, blank=True, null=True)
-    himinfo = models.OneToOneField(HimInfo, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    year_restoration = models.PositiveIntegerField(default=None, blank=True, null=True)
+    passepartout = models.BooleanField()
+    thickness = models.PositiveIntegerField(default=None, blank=True, null=True)
+    ph = models.DecimalField(max_digits=5, decimal_places=3, default=None, blank=True, null=True)
+    himinfo = models.OneToOneField(HimImage, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.code
@@ -69,7 +61,7 @@ class Image(models.Model):
 
 
 class Report(models.Model):
-    additional = models.ForeignKey(Additional, on_delete=models.CASCADE, related_name="report_set")
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="report_set")
     date = models.DateField()
     file = models.FileField(upload_to=report_upload_path)
 
@@ -81,32 +73,32 @@ class Material(models.Model):
         return self.name
 
 
-class Structure(models.Model):
-    him_info = models.ForeignKey(HimInfo, on_delete=models.CASCADE, related_name="structure")
+class StructureResearch(models.Model):
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="structure_set")
     hertzberg = models.ImageField(upload_to=structure_upload_path, blank=True, null=True)
     graf_c = models.ImageField(upload_to=structure_upload_path, blank=True, null=True)
     discription = models.ManyToManyField(Material, blank=True)
 
 
-class Rfa(models.Model):
-    him_info = models.ForeignKey(HimInfo, on_delete=models.CASCADE, related_name="rfa")
-    image = models.ImageField()
-    text = models.FileField(blank=True, null=True)
+class RfaResearch(models.Model):
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="rfa_set")
+    image = models.ImageField(upload_to=rfa_upload_path)
+    txt = models.FileField(upload_to=rfa_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
 
 
-class Furie(models.Model):
-    him_info = models.ForeignKey(HimInfo, on_delete=models.CASCADE, related_name="furie")
-    image = models.ImageField()
-    text = models.FileField(blank=True, null=True)
+class FurieResearch(models.Model):
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="furie_set")
+    image = models.ImageField(upload_to=furie_upload_path)
+    txt = models.FileField(upload_to=furie_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
 
 
-class Krs(models.Model):
-    him_info = models.ForeignKey(HimInfo, on_delete=models.CASCADE, related_name="krs")
-    image = models.ImageField()
-    text = models.FileField(blank=True, null=True)
+class KrsResearch(models.Model):
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="krs_set")
+    image = models.ImageField(upload_to=krs_upload_path)
+    txt = models.FileField(upload_to=furie_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)

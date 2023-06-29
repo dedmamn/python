@@ -4,3 +4,4 @@ betelgeuse/paper/migrations/__pycache__/
 betelgeuse/paper/migrations/
 betelgeuse/media/
 betelgeuse/db.sqlite3
+backup_base_migration/
