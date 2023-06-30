@@ -15,20 +15,22 @@ def index(request):
 def addPaper(request):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = AddPaperForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/")
-        else:
-            form = AddPaperForm()
-        return render(request, "paper/addPaper.html", {"form": form})
+        form = PaperForm(request.POST)
+        report_formset = PaperReportFormSet(request.POST, request.FILES, prefix="reports")
 
-    # if a GET (or any other method) we'll create a blank form
+        if form.is_valid() and report_formset.is_valid():
+            paper = form.save()
+            report_formset.instance = paper
+            report_formset.save()
+
+            return index(request)
+        else:
+            print(report_formset.errors)
     else:
-        form = AddPaperForm()
-    return render(request, "paper/addPaper.html", {"title": "Добавление записи", "form": form})
+        form = PaperForm()
+        report_formset = PaperReportFormSet(prefix="reports")
+
+    return render(request, "paper/addPaper.html", {"form": form, "report_formset": report_formset})
 
 
 def about(request):

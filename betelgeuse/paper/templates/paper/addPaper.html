@@ -1,10 +1,29 @@
 {% extends 'paper/base.html' %}
 
 {% block content %}
-<h1>{{title}}</h1>
+{% comment %} <h1>{{title}}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Submit">
 </form>
+<h1>Добавление report</h1>
+<form method="post", enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ report_formset }}
+</form>
+<input type="submit" value="Submit"> {% endcomment %}
+    <h1>Create Paper</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <h2>Add Report</h2>
+        {{ report_formset.management_form }}
+        {% for form in report_formset %}
+            {{ form.as_table }}
+        {% endfor %}
+
+
+        <input type="submit" value="Create Paper">
+    </form>
 {% endblock content %}

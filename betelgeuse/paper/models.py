@@ -36,7 +36,7 @@ class Paper(models.Model):
     passepartout = models.BooleanField()
     thickness = models.PositiveIntegerField(default=None, blank=True, null=True)
     ph = models.DecimalField(max_digits=5, decimal_places=3, default=None, blank=True, null=True)
-    himinfo = models.OneToOneField(HimImage, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    HimImage = models.OneToOneField(HimImage, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.code
@@ -62,7 +62,7 @@ class Image(models.Model):
 
 class Report(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="report_set")
-    date = models.DateField()
+    date = models.DateField(default=timezone.now)
     file = models.FileField(upload_to=report_upload_path)
 
 
@@ -94,6 +94,9 @@ class FurieResearch(models.Model):
     txt = models.FileField(upload_to=furie_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Furie paper - {self.paper.code} research"
 
 
 class KrsResearch(models.Model):
