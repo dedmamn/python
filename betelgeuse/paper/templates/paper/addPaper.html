@@ -1,29 +1,48 @@
 {% extends 'paper/base.html' %}
 
 {% block content %}
-{% comment %} <h1>{{title}}</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
-</form>
-<h1>Добавление report</h1>
-<form method="post", enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ report_formset }}
-</form>
-<input type="submit" value="Submit"> {% endcomment %}
-    <h1>Create Paper</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <h2>Add Report</h2>
-        {{ report_formset.management_form }}
-        {% for form in report_formset %}
-            {{ form.as_table }}
-        {% endfor %}
-
-
-        <input type="submit" value="Create Paper">
-    </form>
+    
+    <h2>Create Paper</h2>
+    {{ paper_form.as_p }}
+    
+    <h2>Reports</h2>
+    {{ paper_form.report_formset.management_form }}
+    {% for form in paper_form.report_formset %}
+      {{ form.as_table }}
+    {% endfor %}
+    
+    <h2>Images</h2>
+    {{ paper_form.image_formset.management_form }}
+    {% for form in paper_form.image_formset %}
+      {{ form.as_table }}
+    {% endfor %}
+    
+    <h2>Structure Research</h2>
+    {{ paper_form.structure_formset.management_form }}
+    {% for form in paper_form.structure_formset %}
+      {{ form.as_table }}
+    {% endfor %}
+    
+    <h2>RFA Research</h2>
+    {{ paper_form.rfa_formset.management_form }}
+    {% for form in paper_form.rfa_formset %}
+      {{ form.as_table }}
+    {% endfor %}
+    
+    <h2>Furie Research</h2>
+    {{ paper_form.furie_formset.management_form }}
+    {% for form in paper_form.furie_formset %}
+      {{ form.as_table }}
+    {% endfor %}
+    
+    <h2>KRS Research</h2>
+    {{ paper_form.krs_formset.management_form }}
+    {% for form in paper_form.krs_formset %}
+      {{ form.as_table }}
+    {% endfor %}
+    
+    <button type="submit">Submit</button>
+  </form>
 {% endblock content %}

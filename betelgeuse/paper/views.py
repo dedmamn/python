@@ -13,24 +13,15 @@ def index(request):
 
 
 def addPaper(request):
-    # if this is a POST request we need to process the form data
     if request.method == "POST":
-        form = PaperForm(request.POST)
-        report_formset = PaperReportFormSet(request.POST, request.FILES, prefix="reports")
-
-        if form.is_valid() and report_formset.is_valid():
-            paper = form.save()
-            report_formset.instance = paper
-            report_formset.save()
-
+        form = PaperForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
             return index(request)
-        else:
-            print(report_formset.errors)
     else:
         form = PaperForm()
-        report_formset = PaperReportFormSet(prefix="reports")
 
-    return render(request, "paper/addPaper.html", {"form": form, "report_formset": report_formset})
+    return render(request, "paper/addPaper.html", {"paper_form": form})
 
 
 def about(request):
