@@ -1,41 +1,5 @@
 from django import forms
-from .models import (
-    Paper,
-    Report,
-    Image,
-    StructureResearch,
-    RfaResearch,
-    FurieResearch,
-    KrsResearch,
-    Subtitle,
-    Author,
-    Material,
-    HimImage,
-)
-
-
-class SubtitleForm(forms.ModelForm):
-    class Meta:
-        model = Subtitle
-        fields = ["name"]
-
-
-class AuthorForm(forms.ModelForm):
-    class Meta:
-        model = Author
-        fields = ["name"]
-
-
-class HimImageForm(forms.ModelForm):
-    class Meta:
-        model = HimImage
-        fields = ["microscopy", "uf", "express_test"]
-
-
-class DescriptionForm(forms.ModelForm):
-    class Meta:
-        model = Material
-        fields = ["name"]
+from .models import *
 
 
 class ReportForm(forms.ModelForm):
@@ -74,25 +38,13 @@ class KrsResearchForm(forms.ModelForm):
         fields = ["image", "txt", "parameters", "result"]
 
 
-SubtitleFormset = forms.modelformset_factory(Subtitle, form=SubtitleForm, extra=1)
-AuthorFormset = forms.modelformset_factory(Author, form=AuthorForm, extra=1)
-DescriptionFormset = forms.modelformset_factory(Material, form=DescriptionForm, extra=1)
-ReportFormset = forms.modelformset_factory(Report, form=ReportForm, extra=1)
-ImageFormset = forms.modelformset_factory(Image, form=ImageForm, extra=1)
-StructureResearchFormset = forms.modelformset_factory(StructureResearch, form=StructureResearchForm, extra=1)
-RfaResearchFormset = forms.modelformset_factory(RfaResearch, form=RfaResearchForm, extra=1)
-FurieResearchFormset = forms.modelformset_factory(FurieResearch, form=FurieResearchForm, extra=1)
-KrsResearchFormset = forms.modelformset_factory(KrsResearch, form=KrsResearchForm, extra=1)
-
-
 class PaperForm(forms.ModelForm):
-    subtitles = forms.ModelMultipleChoiceField(
-        queryset=Subtitle.objects.all(), widget=forms.CheckboxSelectMultiple, required=False
-    )
-    authors = forms.ModelMultipleChoiceField(
-        queryset=Author.objects.all(), widget=forms.CheckboxSelectMultiple, required=False
-    )
-    him_image_form = HimImageForm(prefix="him_image")
+    report_formset = forms.inlineformset_factory(Paper, Report, form=ReportForm, extra=1)
+    image_formset = forms.inlineformset_factory(Paper, Image, form=ImageForm, extra=1)
+    structure_formset = forms.inlineformset_factory(Paper, StructureResearch, form=StructureResearchForm, extra=1)
+    rfa_formset = forms.inlineformset_factory(Paper, RfaResearch, form=RfaResearchForm, extra=1)
+    furie_formset = forms.inlineformset_factory(Paper, FurieResearch, form=FurieResearchForm, extra=1)
+    krs_formset = forms.inlineformset_factory(Paper, KrsResearch, form=KrsResearchForm, extra=1)
 
     class Meta:
         model = Paper
@@ -102,27 +54,39 @@ class PaperForm(forms.ModelForm):
             "year_start",
             "year_end",
             "url",
+            "subtitles",
+            "authors",
             "year_restoration",
             "passepartout",
             "thickness",
             "ph",
+            "HimImage",
         ]
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if "instance" in kwargs:
-            self.fields["subtitles"].initial = kwargs["instance"].subtitles.all()
-            self.fields["authors"].initial = kwargs["instance"].authors.all()
+        super(PaperForm, self).__init__(*args, **kwargs)
+        self.fields["subtitles"].widget.attrs["class"] = "select2"
+        self.fields["authors"].widget.attrs["class"] = "select2"
 
     def save(self, commit=True):
-        instance = super().save(commit=commit)
+        instance = super(PaperForm, self).save(commit=commit)
         if commit:
-            instance.subtitles.set(self.cleaned_data["subtitles"])
-            instance.authors.set(self.cleaned_data["authors"])
+            self.report_formset.instance = instance
+            self.report_formset.save()
 
-            if self.him_image_form.is_valid():
-                him_image = self.him_image_form.save()
-                instance.HimImage = him_image
-                instance.save()
+            self.image_formset.instance = instance
+            self.image_formset.save()
+
+            self.structure_formset.instance = instance
+            self.structure_formset.save()
+
+            self.rfa_formset.instance = instance
+            self.rfa_formset.save()
+
+            self.furie_formset.instance = instance
+            self.furie_formset.save()
+
+            self.krs_formset.instance = instance
+            self.krs_formset.save()
 
         return instance
