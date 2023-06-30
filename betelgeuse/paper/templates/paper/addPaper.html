@@ -1,29 +1,58 @@
 {% extends 'paper/base.html' %}
 
 {% block content %}
-{% comment %} <h1>{{title}}</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
-</form>
-<h1>Добавление report</h1>
-<form method="post", enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ report_formset }}
-</form>
-<input type="submit" value="Submit"> {% endcomment %}
-    <h1>Create Paper</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <h2>Add Report</h2>
-        {{ report_formset.management_form }}
-        {% for form in report_formset %}
-            {{ form.as_table }}
-        {% endfor %}
-
-
-        <input type="submit" value="Create Paper">
-    </form>
+    {{ form.as_p }}
+  
+    <h4>Reports:</h4>
+    {% for report_form in form.reports %}
+      <fieldset>
+        <legend>Report {{ forloop.counter }}</legend>
+        {{ report_form.as_table }}
+      </fieldset>
+    {% endfor %}
+  
+    <h4>Images:</h4>
+    {% for image_form in form.images %}
+      <fieldset>
+        <legend>Image {{ forloop.counter }}</legend>
+        {{ image_form.as_table }}
+      </fieldset>
+    {% endfor %}
+  
+    <h4>Structure Researches:</h4>
+    {% for structure_form in form.structure_researches %}
+      <fieldset>
+        <legend>Structure Research {{ forloop.counter }}</legend>
+        {{ structure_form.as_table }}
+      </fieldset>
+    {% endfor %}
+  
+    <h4>RFA Researches:</h4>
+    {% for rfa_form in form.rfa_researches %}
+      <fieldset>
+        <legend>RFA Research {{ forloop.counter }}</legend>
+        {{ rfa_form.as_table }}
+      </fieldset>
+    {% endfor %}
+  
+    <h4>Furie Researches:</h4>
+    {% for furie_form in form.furie_researches %}
+      <fieldset>
+        <legend>Furie Research {{ forloop.counter }}</legend>
+        {{ furie_form.as_table }}
+      </fieldset>
+    {% endfor %}
+  
+    <h4>KRS Researches:</h4>
+    {% for krs_form in form.krs_researches %}
+      <fieldset>
+        <legend>KRS Research {{ forloop.counter }}</legend>
+        {{ krs_form.as_table }}
+      </fieldset>
+    {% endfor %}
+  
+    <button type="submit">Create Paper</button>
+  </form>
 {% endblock content %}
