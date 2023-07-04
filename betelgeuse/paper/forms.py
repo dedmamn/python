@@ -5,37 +5,37 @@ from .models import *
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ["date", "file"]
+        fields = "__all__"
 
 
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ["bw_positive", "color_positive", "date_capture"]
+        fields = "__all__"
 
 
 class StructureResearchForm(forms.ModelForm):
     class Meta:
         model = StructureResearch
-        fields = ["hertzberg", "graf_c", "discription"]
+        fields = "__all__"
 
 
 class RfaResearchForm(forms.ModelForm):
     class Meta:
         model = RfaResearch
-        fields = ["image", "txt", "parameters", "result"]
+        fields = "__all__"
 
 
 class FurieResearchForm(forms.ModelForm):
     class Meta:
         model = FurieResearch
-        fields = ["image", "txt", "parameters", "result"]
+        fields = "__all__"
 
 
 class KrsResearchForm(forms.ModelForm):
     class Meta:
         model = KrsResearch
-        fields = ["image", "txt", "parameters", "result"]
+        fields = "__all__"
 
 
 class PaperForm(forms.ModelForm):
@@ -48,20 +48,7 @@ class PaperForm(forms.ModelForm):
 
     class Meta:
         model = Paper
-        fields = [
-            "code",
-            "title",
-            "year_start",
-            "year_end",
-            "url",
-            "subtitles",
-            "authors",
-            "year_restoration",
-            "passepartout",
-            "thickness",
-            "ph",
-            "HimImage",
-        ]
+        fields = "__all__"
 
     def __init__(self, *args, **kwargs):
         super(PaperForm, self).__init__(*args, **kwargs)
