@@ -49,6 +49,14 @@ class Paper(models.Model):
     def get_subtitles_as_string(self):
         return ", ".join([subtitle.name for subtitle in self.subtitles.all()])
 
+    def get_authors_as_string(self):
+        return ", ".join([author.name for author in self.authors.all()])
+
+    def get_years_as_string(self):
+        year_start = str(self.year_start) if self.year_start is not None else ""
+        year_end = str(self.year_end) if self.year_end is not None else ""
+        return " - ".join([year_start, year_end])
+
 
 class Image(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="image_set")

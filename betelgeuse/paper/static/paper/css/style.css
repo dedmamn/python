@@ -1,94 +1,201 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+html {
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #f2f2f2;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-header input[type="text"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.content {
-    padding: 20px;
-}
-
-footer {
-    background-color: #f2f2f2;
-    padding: 10px;
-    text-align: center;
-    font-size: 12px;
-}
-
-.card_container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
-
-/* Стили карточки */
-.card {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 10px;
-    background-color: #f1f1f1;
-    padding: 8px 30px 20px 30px;
-    margin: 10px;
-    width: auto;
-}
-
-.title {
-    font-size: 24px;
-}
-
-.codeKP {
-    font-size: 16px;
-    color: gray;
-}
-
-.subtitle {
-    font-size: 14px;
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-
-.link {
-    display: block;
-    margin-top: 10px;
-    text-decoration: none;
-    color: blue;
-}
-
-.image {
-    margin-top: 10px;
+img {
     max-width: 100%;
     height: auto;
 }
 
-.button {
-    display: block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: blue;
-    color: white;
+a {
+    color: inherit;
     text-decoration: none;
-    text-align: center;
-    border-radius: 4px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+    padding: 0;
+    margin: 0;
+}
+
+section {
+    padding: 0, 50px;
+}
+
+button {
+    cursor: pointer;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    font-family: Roboto, sans-serif;
+    background-color: #FFFEFE;
+    ;
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    line-height: 1;
+    overflow-x: hidden;
+}
+
+.header__h-flexbox {
+    border-bottom: 4px solid rgb(106, 122, 149);
+    padding: 15px 7.5% 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.h-flexbox__tb {
+    display: flex;
+}
+
+.title {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 40px;
+    margin-right: 25px;
+}
+
+.new-card-btn {
+    width: 200px;
+    height: 40px;
+    background-color: rgb(255, 137, 137);
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(3, 3, 3, 0.1) 0px 0px 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 19px;
+    white-space: pre-wrap;
+}
+
+.search {
+    width: 223px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 0 10px;
+}
+
+.main {
+    background-color: #D3D3D3;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+
+.gallery__list {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 245px 245px 245px 245px 245px;
+    gap: 20px;
+}
+
+.list__card {
+    width: 245px;
+    height: 304px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(3, 3, 3, 0.1) 0px 2px 10px;
+    border-radius: 10px;
+}
+
+.card__info {
+    padding: 10px 20px;
+}
+
+.card__id-and-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: end;
+}
+
+.card__id {
+    display: inline;
+    background-color: #FF8989;
+    border-radius: 5px;
+    padding: 2px 7px;
+}
+
+.card__btn {
+    display: inline;
+}
+
+.card__redact {
+    border: none;
+    width: 28px;
+    height: 28px;
+    background-image: url(../images/pen.svg);
+    background-size: cover;
+}
+
+.card__title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card__description {
+    margin-bottom: 10px;
+}
+
+.card__author-and-date {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #6a7a95;
+}
+
+.card__container-img {
+    border-radius: 10px;
+    max-width: 100%;
+    max-height: 156px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+.card__container-img::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card__container-img::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.card__container-img::-webkit-scrollbar-thumb {
+    background-color: #FF8989;
+    border-radius: 3px;
+}
+
+.card__img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    border-top: 4px solid rgb(106, 122, 149);
+    height: 40px;
+    padding-top: 10px;
 }
