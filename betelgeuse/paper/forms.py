@@ -1,5 +1,8 @@
 from django import forms
 from .models import *
+from django_selectize import forms as s2forms
+from formset.widgets import DateInput, Selectize, UploadedFileInput, SelectizeMultiple
+from django.views.generic.edit import FormView
 
 
 class ReportForm(forms.ModelForm):
@@ -42,6 +45,19 @@ class HimImageForm(forms.ModelForm):
     class Meta:
         model = HimImage
         fields = "__all__"
+        # widgets = {
+        #     "microscopy": UploadedFileInput,
+        #     "uf": UploadedFileInput,
+        #     "express_test": UploadedFileInput,
+        # }
+
+
+# class AuthorForm(forms.Widget):
+#     name = forms.models.ModelChoiceField(
+#         label="Авторы",
+#         queryset=Author.objects.all(),
+#         widget=SelectizeMultiple(search_lookup="name__icontains"),
+#     )
 
 
 class PaperForm(forms.ModelForm):
@@ -60,10 +76,12 @@ class PaperForm(forms.ModelForm):
     class Meta:
         model = Paper
         fields = "__all__"
+        widgets = {
+            "authors": SelectizeMultiple(search_lookup="name__icontains"),
+        }
 
-    def __init__(self, *args, **kwargs):
-        super(PaperForm, self).__init__(*args, **kwargs)
-        self.fields["authors"].widget.attrs["class"] = "select2"
+    # def __init__(self, *args, **kwargs):
+    #     super(PaperForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         instance = super(PaperForm, self).save(commit=commit)

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бетельгейзе</title>
     <link type="text/css" rel="stylesheet" href="{% static 'paper/css/style.css' %}">
+    <script type="module" src="{% static 'formset/js/django-formset.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@700&display=swap" rel="stylesheet">
@@ -17,8 +18,8 @@
     <header class="header">
         <div class="header__h-flexbox">
             <div class="h-flexbox__tb">
-                <h1 class="title">Бетельгейзе</h1>
-                <button class="new-card-btn">+      Новая запись</button>
+                <h1 class="title"><a href="/">Бетельгейзе</a></h1>
+                <button class="new-card-btn" ><a class="new-card-link" href="/create">+      Новая запись</a></button>
             </div>
             <input class="search" type="search" name="" id="" placeholder="Поиск ">
         </div>
@@ -29,6 +30,7 @@
     
     <footer class="footer">
         <p class="footer__text"> &#169 2023 Бетельгейзе. Все права защищены.</p>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
                 <ul class="card__info">
                     <div class="card__id-and-btn">
                         <li class="card__id">{{p.code}}</li>
-                        <li class="card__btn"><button class="card__redact"></button></li>
+                        <li class="card__btn"><button class="card__redact"><a class="redact__link" href="{{p.pk}}"></a></button></li>
                     </div>
                     <li class="card__title">{{p.title}}</li>
                     <li class="card__description">{{ p.get_subtitles_as_string }}</li>

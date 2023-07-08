@@ -1,51 +1,50 @@
 {% extends 'paper/base.html' %}
-
 {% block content %}
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     
     <h2>Create Paper</h2>
-    {{ paper_form.as_p }}
+    {{ form.as_p }}
     
     <h2>Him Image</h2>
-    {{ paper_form.himImage_formset.management_form }}
-    {% for form in paper_form.himImage_formset%}
+    {{ form.himImage_formset.management_form }}
+    {% for form in form.himImage_formset%}
       {{ form.as_table }}
     {% endfor %}
 
     <h2>Reports</h2>
-    {{ paper_form.report_formset.management_form }}
-    {% for form in paper_form.report_formset %}
+    {{ form.report_formset.management_form }}
+    {% for form in form.report_formset %}
       {{ form.as_table }}
     {% endfor %}
     
     <h2>Images</h2>
-    {{ paper_form.image_formset.management_form }}
-    {% for form in paper_form.image_formset %}
+    {{ form.image_formset.management_form }}
+    {% for form in form.image_formset %}
       {{ form.as_table }}
     {% endfor %}
     
     <h2>Structure Research</h2>
-    {{ paper_form.structure_formset.management_form }}
-    {% for form in paper_form.structure_formset %}
+    {{ form.structure_formset.management_form }}
+    {% for form in form.structure_formset %}
       {{ form.as_table }}
     {% endfor %}
     
     <h2>RFA Research</h2>
-    {{ paper_form.rfa_formset.management_form }}
-    {% for form in paper_form.rfa_formset %}
+    {{ form.rfa_formset.management_form }}
+    {% for form in form.rfa_formset %}
       {{ form.as_table }}
     {% endfor %}
     
     <h2>Furie Research</h2>
-    {{ paper_form.furie_formset.management_form }}
-    {% for form in paper_form.furie_formset %}
+    {{ form.furie_formset.management_form }}
+    {% for form in form.furie_formset %}
       {{ form.as_table }}
     {% endfor %}
     
     <h2>KRS Research</h2>
-    {{ paper_form.krs_formset.management_form }}
-    {% for form in paper_form.krs_formset %}
+    {{ form.krs_formset.management_form }}
+    {% for form in form.krs_formset %}
       {{ form.as_table }}
     {% endfor %}
     

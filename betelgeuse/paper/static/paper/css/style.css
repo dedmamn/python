@@ -74,7 +74,16 @@ body {
     margin-right: 25px;
 }
 
+.new-card-link {
+    cursor: pointer;
+    display: block;
+    padding-top: 7px;
+    width: 100%;
+    height: 100%;
+}
+
 .new-card-btn {
+    cursor: default;
     width: 200px;
     height: 40px;
     background-color: rgb(255, 137, 137);
@@ -144,6 +153,12 @@ body {
     height: 28px;
     background-image: url(../images/pen.svg);
     background-size: cover;
+}
+
+.redact__link {
+    display: block;
+    width: 23px;
+    height: 28px;
 }
 
 .card__title {

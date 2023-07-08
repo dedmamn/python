@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "paper",
     "debug_toolbar",
+    "formset",
 ]
 
 MIDDLEWARE = [
