@@ -4,7 +4,7 @@ from .models import *
 
 # Register your models here.
 admin.site.register(Paper)
-admin.site.register(Subtitle)
+# admin.site.register(Subtitle)
 admin.site.register(Image)
 admin.site.register(Report)
 admin.site.register(Material)

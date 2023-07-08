@@ -1,14 +1,15 @@
+from taggit.managers import TaggableManager
 from django.db import models
 from django.utils import timezone
 from .tools import *
 
 
 # Create your models here.
-class Subtitle(models.Model):
-    name = models.CharField(max_length=50)
+# class Subtitle(models.Model):
+#     name = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 class Author(models.Model):
@@ -18,25 +19,19 @@ class Author(models.Model):
         return self.name
 
 
-class HimImage(models.Model):
-    microscopy = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
-    uf = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
-    express_test = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
-
-
 class Paper(models.Model):
     code = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     year_start = models.PositiveIntegerField(default=None, blank=True, null=True)
     year_end = models.PositiveIntegerField(default=None, blank=True, null=True)
     url = models.URLField(default=None, blank=True, null=True)
-    subtitles = models.ManyToManyField(Subtitle, default=None, blank=True)
+    subtitle = models.CharField(max_length=100, default=None, blank=True)
     authors = models.ManyToManyField(Author)
     year_restoration = models.PositiveIntegerField(default=None, blank=True, null=True)
     passepartout = models.BooleanField()
     thickness = models.PositiveIntegerField(default=None, blank=True, null=True)
     ph = models.DecimalField(max_digits=5, decimal_places=3, default=None, blank=True, null=True)
-    HimImage = models.OneToOneField(HimImage, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    # HimImage = models.OneToOneField(HimImage, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.code
@@ -46,8 +41,8 @@ class Paper(models.Model):
         if latest_paper_image:
             return latest_paper_image.color_positive
 
-    def get_subtitles_as_string(self):
-        return ", ".join([subtitle.name for subtitle in self.subtitles.all()])
+    # def get_subtitles_as_string(self):
+    #     return ", ".join([subtitle.name for subtitle in self.subtitles.all()])
 
     def get_authors_as_string(self):
         return ", ".join([author.name for author in self.authors.all()])
@@ -56,6 +51,13 @@ class Paper(models.Model):
         year_start = str(self.year_start) if self.year_start is not None else ""
         year_end = str(self.year_end) if self.year_end is not None else ""
         return " - ".join([year_start, year_end])
+
+
+class HimImage(models.Model):
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="him_image")
+    microscopy = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
+    uf = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
+    express_test = models.ImageField(upload_to=himInfo_upload_path, blank=True, null=True)
 
 
 class Image(models.Model):

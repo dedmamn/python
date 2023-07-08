@@ -7,6 +7,12 @@
     <h2>Create Paper</h2>
     {{ paper_form.as_p }}
     
+    <h2>Him Image</h2>
+    {{ paper_form.himImage_formset.management_form }}
+    {% for form in paper_form.himImage_formset%}
+      {{ form.as_table }}
+    {% endfor %}
+
     <h2>Reports</h2>
     {{ paper_form.report_formset.management_form }}
     {% for form in paper_form.report_formset %}
