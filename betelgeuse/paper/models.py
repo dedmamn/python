@@ -2,6 +2,7 @@ from taggit.managers import TaggableManager
 from django.db import models
 from django.utils import timezone
 from .tools import *
+from django.urls import reverse
 
 
 # Create your models here.
@@ -51,6 +52,9 @@ class Paper(models.Model):
         year_start = str(self.year_start) if self.year_start is not None else ""
         year_end = str(self.year_end) if self.year_end is not None else ""
         return " - ".join([year_start, year_end])
+
+    def get_absolute_url(self):
+        return reverse("paper-update", kwargs={"pk": self.pk})
 
 
 class HimImage(models.Model):

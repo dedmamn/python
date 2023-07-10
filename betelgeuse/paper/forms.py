@@ -83,28 +83,28 @@ class PaperForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):
     #     super(PaperForm, self).__init__(*args, **kwargs)
 
-    def save(self, commit=True):
-        instance = super(PaperForm, self).save(commit=commit)
-        if commit:
-            self.himImage_formset.instance = instance
-            self.himImage_formset.save()
+    # def save(self, commit=True):
+    #     instance = super(PaperForm, self).save(self)
+    #     if commit:
+    #         self.himImage_formset.instance = instance
+    #         self.himImage_formset.save(self)
 
-            self.report_formset.instance = instance
-            self.report_formset.save()
+    #         self.report_formset.instance = instance
+    #         self.report_formset.save(self)
 
-            self.image_formset.instance = instance
-            self.image_formset.save()
+    #         self.image_formset.instance = instance
+    #         self.image_formset.save(self)
 
-            self.structure_formset.instance = instance
-            self.structure_formset.save()
+    #         self.structure_formset.instance = instance
+    #         self.structure_formset.save(self)
 
-            self.rfa_formset.instance = instance
-            self.rfa_formset.save()
+    #         self.rfa_formset.instance = instance
+    #         self.rfa_formset.save(self)
 
-            self.furie_formset.instance = instance
-            self.furie_formset.save()
+    #         self.furie_formset.instance = instance
+    #         self.furie_formset.save(self)
 
-            self.krs_formset.instance = instance
-            self.krs_formset.save()
+    #         self.krs_formset.instance = instance
+    #         self.krs_formset.save(self)
 
-        return instance
+    #     return instance

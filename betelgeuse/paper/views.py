@@ -10,8 +10,9 @@ from .forms import *
 
 class PaperList(generic.ListView):
     model = Paper
-    template_name = "paper/index.html"
     context_object_name = "papers"
+    template_name = "paper/index.html"
+    paginate_by = 1
 
 
 class PaperCreate(generic.CreateView):
@@ -26,41 +27,42 @@ class PaperUpdate(generic.UpdateView):
     form_class = PaperForm
 
 
-def index(request):
-    papers = Paper.objects.all()
-    return render(request, "paper/index.html", {"papers": papers})
+# def index(request):
+#     papers = Paper.objects.all()
+#     return render(request, "paper/index.html", {"papers": papers})
 
 
-def detail(request, paper_id):
-    paper = Paper.objects.get(pk=paper_id)
-    form = PaperForm(instance=paper)
-    return render(request, "paper/addPaper.html", {"paper_from": form})
+# def detail(request, paper_id):
+#     paper = get_object_or_404(Paper, id=paper_id)
+#     # paper = Paper.objects.get(pk=paper_id)
+#     form = PaperForm(instance=paper)
+#     return render(request, "paper/addPaper.html", {"paper_from": form})
 
 
-def updatePaper(request, pk):
-    if request.method == "POST":
-        form = PaperForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return index(request)
-    else:
-        paper = Paper.objects.get(pk=pk)
-        form = PaperForm(instance=paper)
+# def updatePaper(request, pk):
+#     if request.method == "POST":
+#         form = PaperForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return index(request)
+#     else:
+#         paper = Paper.objects.get(pk=pk)
+#         form = PaperForm(instance=paper)
 
-    return render(request, "paper/addPaper.html", {"paper_form": form})
-
-
-def addPaper(request):
-    if request.method == "POST":
-        form = PaperForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return index(request)
-    else:
-        form = PaperForm()
-
-    return render(request, "paper/addPaper.html", {"paper_form": form})
+#     return render(request, "paper/addPaper.html", {"paper_form": form})
 
 
-def about(request):
-    return HttpResponse("<h1>О проекте</h1>")
+# def addPaper(request):
+#     if request.method == "POST":
+#         form = PaperForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return index(request)
+#     else:
+#         form = PaperForm()
+
+#     return render(request, "paper/addPaper.html", {"paper_form": form})
+
+
+# def about(request):
+#     return HttpResponse("<h1>О проекте</h1>")
