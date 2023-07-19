@@ -12,13 +12,14 @@ class PaperList(generic.ListView):
     model = Paper
     context_object_name = "papers"
     template_name = "paper/index.html"
-    paginate_by = 1
+    paginate_by = 10
 
 
 class PaperCreate(generic.CreateView):
     model = Paper
     template_name = "paper/addPaper.html"
     form_class = PaperForm
+    success_url = "/"
 
 
 class PaperUpdate(generic.UpdateView):
