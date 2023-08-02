@@ -28,6 +28,27 @@ class PaperUpdate(generic.UpdateView):
     form_class = PaperForm
 
 
+def detail_view(request):
+    # Assuming you have a primary key for the Paper object you want to display
+    paper_id = 1
+
+    paper_instance = Paper.objects.get(pk=paper_id)
+
+    # Assuming you have a queryset to get all related research objects for the Paper instance
+    reports = paper_instance.report_set.all()
+    images = paper_instance.image_set.all()
+    # ... and so on for other related research objects
+
+    context = {
+        "paper_instance": paper_instance,
+        "reports": reports,
+        "images": images,
+        # ... and other related research objects
+    }
+
+    return render(request, "paper/detailPaper.html", context)
+
+
 # def index(request):
 #     papers = Paper.objects.all()
 #     return render(request, "paper/index.html", {"papers": papers})

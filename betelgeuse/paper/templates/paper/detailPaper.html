@@ -1,4 +1,259 @@
 {% extends 'paper/base.html' %}
+{% load static %}
 {% block content %}
+<main class="main-new">
+    <script src="{% static 'paper/js/script.js' %}"></script>
+    <form class="form" method="post" enctype="multipart/form-data">
+        <div class="photo-and-research-area">
 
+            <div class="photo-and-research-area__tabs">
+            <div class="photo__images--tab tabs__card card1 " onclick="tab(1); hideCards('card7', 'card12'); showCard('card1'); showCard('card7')">
+                Фото
+            </div>
+            <div class="photo__chem-images--tab tabs__card card2"onclick="tab(2); hideCards('card7', 'card12');showCard('card2'); showCard('card8')">
+                Хим. Фото
+            </div>
+            <div class="research__structure--tab tabs__card card3"onclick="tab(3); hideCards('card7', 'card12');showCard('card3'); showCard('card9')">
+                Структурный
+            </div>
+            <div class="research__rfa--tab tabs__card card4"onclick="tab(4); hideCards('card7', 'card12'); showCard('card4'); showCard('card10')">
+                RFA
+            </div>
+            <div class="research__furie--tab tabs__card card5"onclick="tab(5); hideCards('card7', 'card12'); showCard('card5'); showCard('card11')">
+                Фурье
+            </div>
+            <div class="research__krs--tab tabs__card card6"onclick="tab(6); hideCards('card7', 'card12'); showCard('card6'); showCard('card12')">
+                KRS
+            </div>
+        </div>
+        <div class="photo-and-research-area__main">
+
+            <fieldset class="photo__images main__card card7">
+                <div class="images__color-positive">
+                    <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
+                    <input class="images__color-positive--input" type="file" id="color-positive" name="color-positive" >
+                    <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                </div>
+
+                <div class="images__bw-positive">
+                    <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
+                    <input class="images__bw-positive--input" type="file" id="bw-positive" name="bw-positive" >
+                    <img id="output_bw-positive" width="200" />
+                </div>
+                
+                <div class="images__capture-date">
+                    <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
+                    <input class="images__capture-date--input" type="date" id="Capture-date" name="Capture-date" >
+                </div>
+            </fieldset>
+            
+            <fieldset class="photo__chem-images main__card card8">
+
+                <div class="chem-images__microscopy">
+                <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
+                <input class="chem-images__microscopy--input" type="file" id="microscopy" name="microscopy">
+                </div>
+                <div class="chem-images__uf">
+                <label class="chem-images__uf--title" for="uf">Ультрафиолет</label>
+                <input class="chem-images__uf--input" type="file" id="uf" name="uf">
+                </div>
+                <div class="chem-images__express">
+                <label class="chem-images__express--title" for="ExpressTest">Экспресс-тест</label>
+                <input class="chem-images__express--input"type="file" id="ExpressTest" name="ExpressTest">
+                </div>
+
+            </fieldset>
+
+            <fieldset class="research__structure main__card card9">
+                
+                <div class="structure__hertzberg">
+                    <label class="structure__hertzberg--title" for="hertzberg">Хертзберг</label>
+                    <input class="structure__hertzberg--input"type="file" id="hertzberg" name="hertzberg">
+                </div>
+                <div class="structure__graf-c">
+                    <label class="structure__graf-c--title" for="graf-c">Граф C</label>
+                    <input class="structure__graf-c--input"type="file" id="graf-c" name="graf-c">
+                </div>
+
+                <div class="structure__description">
+                <label class="structure__description--title" for="description">Описание</label>
+                    <select class="structure__description--input" id="description" name="description" multiple>
+                    <option value="materil1">materil1</option>
+                    <option value="materil1">materil2</option>
+                    </select>
+                </div>
+            </fieldset>
+        
+            
+            <fieldset class="research__element research__rfa main__card card10 ">
+                
+                <div class="rfa__image">
+                    <label class="rfa__image--title" for="RFA-image">Изображение</label>
+                    <input class="rfa__image--input" type="file" id="RFA-image" name="RFA-image">
+                </div>
+
+                <div class="rfa__text">
+                    <label class="rfa__text--title" for="RFA-txt">Txt</label>
+                    <input class="rfa__text--input" type="file" id="RFA-txt" name="RFA-txt">
+                </div>
+                <div class="rfa__parameters">
+                    <label class="rfa__parameters--title" for="RFA-parameters">Параметры</label>
+                    <textarea class="rfa__parameters--input" id="RFA-parameters" name="RFA-parameters" ></textarea>
+                </div>
+                <div class="rfa__result">
+                <label class="rfa__result--title" for="RFA-result">Результат</label>
+                <textarea class="rfa__result--input" id="RFA-result" name="RFA-result" ></textarea>
+                </div>
+            </fieldset>
+
+            
+            <fieldset class="research__element research__furie main__card card11">
+
+                <div class="furie__image">
+
+                <label class="furie__image--title" for="Furie-image">Изображение</label>
+                <input class="furie__image--input" type="file" id="Furie-image" name="Furie-image">
+                </div>
+
+                <div class="furie__text">
+
+                <label class="furie__text--title" for="Furie-txt">Txt</label>
+                <input class="furie__text--input" type="file" id="Furie-txt" name="Furie-txt">
+                </div>
+                <div class="furie__parameters">
+
+                <label class="furie__parameters--title" for="Furie-parameters">Параметры</label>
+                <textarea class="furie__parameters--input" id="Furie-parameters" name="Furie-parameters" ></textarea>
+                </div>
+                <div class="furie__result">
+
+                <label class="furie__result--title" for="Furie-result">Результат</label>
+                <textarea class="furie__result--input" id="Furie-result" name="Furie-result" ></textarea>
+            </div>
+            </fieldset>
+            
+            <fieldset class="research__element research__krs main__card card12">
+                <div class="krs__image">
+                <label class="krs__image--title" for="KRS-image">Изображение</label>
+                <input class="krs__image--input" type="file" id="KRS-image" name="KRS-image">
+                </div>
+
+                <div class="krs__txt">
+
+                <label  class="krs__txt--title" for="KRS-txt">Txt</label>
+                <input  class="krs__txt--input" type="file" id="KRS-txt" name="KRS-txt">
+                </div>
+
+                <div class="krs__parameters">
+
+                <label  class="krs__parameters--title"for="KRS-parameters">Параметры</label>
+                <textarea class="krs__parameters--input" id="KRS-parameters" name="KRS-parameters" ></textarea>
+                </div>
+
+                <div class="krs__result">
+
+                <label class="krs__result--title" for="KRS-result">Результат</label>
+                <textarea  class="krs__result--input"id="KRS-result" name="KRS-result" ></textarea>
+                </div>
+            </fieldset>
+        </div>
+        </div>
+
+        <div class="static-area">
+        <fieldset class="create-paper">
+            <h3 class="create-paper__legend"><u>основная информация</u></h3>
+
+                <div class="create-paper__code create-paper__element">
+                    <label class="create-paper__element--title create-paper__code--title" for="code"> Шифр КП или ВХ</label>
+                    <input class="create-paper__element--input create-paper__code--input" type="text" id="code" name="code" required>
+                </div>
+
+                <div class="create-paper__title create-paper__element">
+                    <label class="create-paper__element--title create-paper__title--title" for="title">Заголовок</label>
+                    <input class="create-paper__element--input create-paper__title--input" type="text" id="title" name="title" required>
+                </div>
+
+                <div class="create-paper__subtitle create-paper__element">
+                    <label class="create-paper__element--title create-paper__subtitle--title" for="subtitle">Подзаголовок</label>
+                    <input class="create-paper__element--input create-paper__subtitle--input" type="text" id="subtitle" name="subtitle" required>
+                </div>
+
+                <div class="create-paper__authors create-paper__element">
+                    <label class="create-paper__element--title create-paper__authors--title" for="authors">Автор(ы)</label>
+                    <select class="create-paper__element--input create-paper__authors--input" id="authors" name="authors" multiple>
+                    <option value="author1">Author 1</option>
+                    <option value="author2">Author 2</option>
+                    </select>
+                </div>
+            
+                <div class="create-paper__year create-paper__element">
+                    <label class="create-paper__element--title create-paper__year--title" for="year-start">Дата</label>
+                    <input class="create-paper__element--input create-paper__year-start--input" type="number" id="year-start" name="year-start" min="0" max="9999" step="1" placeholder="1900" required>
+                    <span class="create-paper__element--title create-paper__year--title">-</span>
+                    <input class="create-paper__element--input create-paper__year-end--input" type="number" id="year-end" name="year-end" min="0" max="9999" placeholder="1900" step="1" required>
+                </div>
+
+                <div class="create-paper__url create-paper__element">
+                    <label class="create-paper__element--title create-paper__url--title" for="url">Свзять с Эйдотекой</label>
+                    <input class="create-paper__element--input create-paper__url--input" type="text" id="url" name="url" required>
+                </div>
+                
+                <div class="create-paper__year-restoration create-paper__element">
+                    <label class="create-paper__element--title create-paper__year-restoration--title" for="year-restoration">Год реставрации</label>
+                    <input class="create-paper__element--input create-paper__year-restoration--input" type="number" id="year-restoration" name="year-restoration" min="0" max="9999" placeholder="1900" step="1" required>
+                </div>
+
+                <div class="create-paper__passepartout create-paper__element">
+                    <label class="create-paper__element--title create-paper__passepartout--title" for="passepartout">Паспарту</label>
+                    <input class="create-paper__element--input create-paper__passepartout--input" type="checkbox" id="passepartout" name="passepartout" required>
+                </div>
+                
+                <div class="create-paper__thickness create-paper__element">
+                    <label class="create-paper__element--title create-paper__thickness--title"  for="thickness">Толщина листа</label>
+                    <input class="create-paper__element--input create-paper__thickness--input" type="number" id="thickness" name="thickness" min="0" max="9999" placeholder="0" step="1" required>
+                    <span class="create-paper__element--title create-paper__thickness--title">мм
+                </div>
+
+                <div class="create-paper__ph create-paper__element">
+                    <label class="create-paper__element--title create-paper__ph--title" for="ph">pH</label>
+                    <input class="create-paper__element--input create-paper__ph--input" type="number" id="ph" name="ph" min="0" max="14" step="1" placeholder="0" required>
+                </div> 
+                
+
+        </fieldset>
+
+        <fieldset class="reports">
+            <h3 class="reports__legend"><u>Отчеты</u></h3>
+
+            <div class="reports__date">
+                <label class="reports__date--title" for="date">Дата написания отчета</label>
+                <input class="reports__date--input" type="date" id="date" name="date">
+            </div>
+
+            <div class="reports__file">
+                <label class="reports__file--title" for="report">Файл отчета</label>
+                <input class="reports__file--input" type="file" id="report" name="report">
+            </div>
+
+        </fieldset> 
+        <input class="submit" type="submit" value="Сохранить">
+    </div>
+    </form>
+
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var loadFile = function(event) {
+            var output = document.getElementById('output_' + event.target.name);
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // освобождение памяти
+            }
+        };
+    
+        document.getElementById('color-positive').addEventListener('change', loadFile);
+        document.getElementById('bw-positive').addEventListener('change', loadFile);
+    });
+    </script>
+    
 {% endblock content%}

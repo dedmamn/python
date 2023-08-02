@@ -1,9 +1,0 @@
-{% extends 'paper/base.html' %}
-{% block content %}
-
-<django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
-    {{ form.as_p }}
-    <input type="submit" value="Send message">
-</django-formset>
-
-{% endblock content %}
