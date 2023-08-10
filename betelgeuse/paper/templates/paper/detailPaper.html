@@ -4,6 +4,7 @@
 <main class="main-new">
     <script src="{% static 'paper/js/script.js' %}"></script>
     <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="photo-and-research-area">
 
             <div class="photo-and-research-area__tabs">
