@@ -9,12 +9,28 @@ class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = "__all__"
+        widgets = {
+            "date": forms.DateInput(
+                attrs={"class": "reports__date--input", "type": "date", "id": "date", "name": "date"}
+            ),
+            "file": forms.FileInput(
+                attrs={"class": "reports__file--input", "type": "file", "id": "report", "name": "report"}
+            ),
+        }
 
 
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = "__all__"
+        widgets = {
+            "color_positive": forms.FileInput(attrs={"class": "images__color-positive--input", "id": "color-positive"}),
+            "bw_positive": forms.FileInput(attrs={"class": "images__bw-positive--input", "id": "bw-positive"}),
+            "capture_date": forms.DateInput(
+                format=("%Y-%m-%d"),
+                attrs={"class": "images__capture-date--input", "id": "Capture-date", "type": "date"},
+            ),
+        }
 
 
 class StructureResearchForm(forms.ModelForm):
@@ -183,13 +199,6 @@ class PaperForm(forms.ModelForm):
                     "max": "14",
                     "required": True,
                 }
-            ),
-            # Для дополнительных полей "Отчеты" вы можете добавить аналогичные атрибуты
-            "date": forms.DateInput(
-                attrs={"class": "reports__date--input", "type": "date", "id": "date", "name": "date"}
-            ),
-            "report": forms.FileInput(
-                attrs={"class": "reports__file--input", "type": "file", "id": "report", "name": "report"}
             ),
         }
 

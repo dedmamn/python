@@ -31,22 +31,24 @@
         <div class="photo-and-research-area__main">
 
             <fieldset class="photo__images main__card card7">
+                {% for image_form in form.image_formset %}
                 <div class="images__color-positive">
                     <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
-                    <input class="images__color-positive--input" type="file" id="color-positive" name="color-positive" >
+                    {{ image_form.color_positive }}
                     <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                 </div>
 
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
-                    <input class="images__bw-positive--input" type="file" id="bw-positive" name="bw-positive" >
+                    {{ image_form.bw_positive }}
                     <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                 </div>
                 
                 <div class="images__capture-date">
                     <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
-                    <input class="images__capture-date--input" type="date" id="Capture-date" name="Capture-date" >
+                    {{ image_form.capture_date }}
                 </div>
+                {% endfor %}
                 <div id="expanded-image">
                     <img id="expanded-image-content" src="" alt="Увеличенное изображение">
                 </div>
@@ -172,58 +174,57 @@
 
                 <div class="create-paper__code create-paper__element">
                     <label class="create-paper__element--title create-paper__code--title" for="code"> Шифр КП или ВХ</label>
-                    {{ form.my_field.code }}
+                    {{ form.code }}
                 </div>
 
                 <div class="create-paper__title create-paper__element">
                     <label class="create-paper__element--title create-paper__title--title" for="title">Заголовок</label>
-                    {{ form.my_field.title }}
+                    {{ form.title }}
                 </div>
 
                 <div class="create-paper__subtitle create-paper__element">
                     <label class="create-paper__element--title create-paper__subtitle--title" for="subtitle">Подзаголовок</label>
-                    {{ form.my_field.subtitle }}
+                    {{ form.subtitle }}
                 </div>
 
                 <div class="create-paper__authors create-paper__element">
                     <label class="create-paper__element--title create-paper__authors--title" for="authors">Автор(ы)</label>
-                    {{ form.my_field.authors }}
+                    {{ form.authors }}
                     <option value="author1">Author 1</option>
                     <option value="author2">Author 2</option>
-                    </select>
                 </div>
             
                 <div class="create-paper__year create-paper__element">
                     <label class="create-paper__element--title create-paper__year--title" for="year-start">Дата</label>
-                    {{ form.my_field.year_start }}
+                    {{ form.year_start }}
                     <span class="create-paper__element--title create-paper__year--title">-</span>
-                    {{ form.my_field.year_end }}
+                    {{ form.year_end }}
                 </div>
 
                 <div class="create-paper__url create-paper__element">
                     <label class="create-paper__element--title create-paper__url--title" for="url">Свзять с Эйдотекой</label>
-                    {{ form.my_field.url }}
+                    {{ form.url }}
                 </div>
                 
                 <div class="create-paper__year-restoration create-paper__element">
                     <label class="create-paper__element--title create-paper__year-restoration--title" for="year-restoration">Год реставрации</label>
-                    {{ form.my_field.year_restoration }}
+                    {{ form.year_restoration }}
                  </div>
 
                 <div class="create-paper__passepartout create-paper__element">
                     <label class="create-paper__element--title create-paper__passepartout--title" for="passepartout">Паспарту</label>
-                    {{ form.my_field.passepartout }}
+                    {{ form.passepartout }}
                  </div>
                 
                 <div class="create-paper__thickness create-paper__element">
                     <label class="create-paper__element--title create-paper__thickness--title"  for="thickness">Толщина листа</label>
-                    {{ form.my_field.thickness }}
+                    {{ form.thickness }}
                     <span class="create-paper__element--title create-paper__thickness--title">мм
                 </div>
 
                 <div class="create-paper__ph create-paper__element">
                     <label class="create-paper__element--title create-paper__ph--title" for="ph">pH</label>
-                    {{ form.my_field.ph }}
+                    {{ form.ph }}
                 </div> 
                 
 
@@ -234,12 +235,17 @@
 
             <div class="reports__date">
                 <label class="reports__date--title" for="date">Дата написания отчета</label>
-                {{ form.my_field.date }}
+                {% for report_form in form.report_formset %}
+                    {{ report_form.date }}
+                {% endfor %}
+                
             </div>
 
             <div class="reports__file">
                 <label class="reports__file--title" for="report">Файл отчета</label>
-                {{ form.my_field.report }}
+                {% for report_form in form.report_formset %}    
+                    {{ report_form.file }}  
+                {% endfor %}
             </div>
 
         </fieldset> 
