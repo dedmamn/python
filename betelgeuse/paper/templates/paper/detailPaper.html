@@ -172,22 +172,22 @@
 
                 <div class="create-paper__code create-paper__element">
                     <label class="create-paper__element--title create-paper__code--title" for="code"> Шифр КП или ВХ</label>
-                    <input class="create-paper__element--input create-paper__code--input" type="text" id="code" name="code" required>
+                    {{ form.my_field.code }}
                 </div>
 
                 <div class="create-paper__title create-paper__element">
                     <label class="create-paper__element--title create-paper__title--title" for="title">Заголовок</label>
-                    <input class="create-paper__element--input create-paper__title--input" type="text" id="title" name="title" required>
+                    {{ form.my_field.title }}
                 </div>
 
                 <div class="create-paper__subtitle create-paper__element">
                     <label class="create-paper__element--title create-paper__subtitle--title" for="subtitle">Подзаголовок</label>
-                    <input class="create-paper__element--input create-paper__subtitle--input" type="text" id="subtitle" name="subtitle" required>
+                    {{ form.my_field.subtitle }}
                 </div>
 
                 <div class="create-paper__authors create-paper__element">
                     <label class="create-paper__element--title create-paper__authors--title" for="authors">Автор(ы)</label>
-                    <select class="create-paper__element--input create-paper__authors--input" id="authors" name="authors" multiple>
+                    {{ form.my_field.authors }}
                     <option value="author1">Author 1</option>
                     <option value="author2">Author 2</option>
                     </select>
@@ -195,35 +195,35 @@
             
                 <div class="create-paper__year create-paper__element">
                     <label class="create-paper__element--title create-paper__year--title" for="year-start">Дата</label>
-                    <input class="create-paper__element--input create-paper__year-start--input" type="number" id="year-start" name="year-start" min="0" max="9999" step="1" placeholder="1900" required>
+                    {{ form.my_field.year_start }}
                     <span class="create-paper__element--title create-paper__year--title">-</span>
-                    <input class="create-paper__element--input create-paper__year-end--input" type="number" id="year-end" name="year-end" min="0" max="9999" placeholder="1900" step="1" required>
+                    {{ form.my_field.year_end }}
                 </div>
 
                 <div class="create-paper__url create-paper__element">
                     <label class="create-paper__element--title create-paper__url--title" for="url">Свзять с Эйдотекой</label>
-                    <input class="create-paper__element--input create-paper__url--input" type="text" id="url" name="url" required>
+                    {{ form.my_field.url }}
                 </div>
                 
                 <div class="create-paper__year-restoration create-paper__element">
                     <label class="create-paper__element--title create-paper__year-restoration--title" for="year-restoration">Год реставрации</label>
-                    <input class="create-paper__element--input create-paper__year-restoration--input" type="number" id="year-restoration" name="year-restoration" min="0" max="9999" placeholder="1900" step="1" required>
-                </div>
+                    {{ form.my_field.year_restoration }}
+                 </div>
 
                 <div class="create-paper__passepartout create-paper__element">
                     <label class="create-paper__element--title create-paper__passepartout--title" for="passepartout">Паспарту</label>
-                    <input class="create-paper__element--input create-paper__passepartout--input" type="checkbox" id="passepartout" name="passepartout" required>
-                </div>
+                    {{ form.my_field.passepartout }}
+                 </div>
                 
                 <div class="create-paper__thickness create-paper__element">
                     <label class="create-paper__element--title create-paper__thickness--title"  for="thickness">Толщина листа</label>
-                    <input class="create-paper__element--input create-paper__thickness--input" type="number" id="thickness" name="thickness" min="0" max="9999" placeholder="0" step="1" required>
+                    {{ form.my_field.thickness }}
                     <span class="create-paper__element--title create-paper__thickness--title">мм
                 </div>
 
                 <div class="create-paper__ph create-paper__element">
                     <label class="create-paper__element--title create-paper__ph--title" for="ph">pH</label>
-                    <input class="create-paper__element--input create-paper__ph--input" type="number" id="ph" name="ph" min="0" max="14" step="1" placeholder="0" required>
+                    {{ form.my_field.ph }}
                 </div> 
                 
 
@@ -234,12 +234,12 @@
 
             <div class="reports__date">
                 <label class="reports__date--title" for="date">Дата написания отчета</label>
-                <input class="reports__date--input" type="date" id="date" name="date">
+                {{ form.my_field.date }}
             </div>
 
             <div class="reports__file">
                 <label class="reports__file--title" for="report">Файл отчета</label>
-                <input class="reports__file--input" type="file" id="report" name="report">
+                {{ form.my_field.report }}
             </div>
 
         </fieldset> 

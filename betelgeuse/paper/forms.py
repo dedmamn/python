@@ -83,19 +83,114 @@ class PaperForm(forms.ModelForm):
                     "type": "text",
                     "id": "code",
                     "name": "code",
-                    "required": 1,
+                    "required": True,
                 }
             ),
-            "title": forms.TextInput(attrs={"class": "title-class"}),
-            "year_start": forms.NumberInput(attrs={"class": "year-start-class"}),
-            "year_end": forms.NumberInput(attrs={"class": "year-end-class"}),
-            "url": forms.URLInput(attrs={"class": "url-class"}),
-            "subtitle": forms.TextInput(attrs={"class": "subtitle-class"}),
-            "authors": forms.SelectMultiple(attrs={"class": "authors-class"}),
-            "year_restoration": forms.NumberInput(attrs={"class": "year-restoration-class"}),
-            "passepartout": forms.CheckboxInput(attrs={"class": "passepartout-class"}),
-            "thickness": forms.NumberInput(attrs={"class": "thickness-class"}),
-            "ph": forms.NumberInput(attrs={"class": "ph-class"}),
+            "title": forms.TextInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__title--input",
+                    "type": "text",
+                    "id": "title",
+                    "name": "title",
+                    "required": True,
+                }
+            ),
+            "subtitle": forms.TextInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__subtitle--input",
+                    "type": "text",
+                    "id": "subtitle",
+                    "name": "subtitle",
+                    "required": True,
+                }
+            ),
+            "authors": forms.SelectMultiple(
+                attrs={
+                    "class": "create-paper__element--input create-paper__authors--input",
+                    "id": "authors",
+                    "name": "authors",
+                }
+            ),
+            "year_start": forms.NumberInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__year-start--input",
+                    "type": "number",
+                    "id": "year-start",
+                    "name": "year-start",
+                    "min": "0",
+                    "max": "9999",
+                    "required": True,
+                }
+            ),
+            "year_end": forms.NumberInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__year-end--input",
+                    "type": "number",
+                    "id": "year-end",
+                    "name": "year-end",
+                    "min": "0",
+                    "max": "9999",
+                    "required": True,
+                }
+            ),
+            "url": forms.URLInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__url--input",
+                    "type": "text",
+                    "id": "url",
+                    "name": "url",
+                    "required": True,
+                }
+            ),
+            "year_restoration": forms.NumberInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__year-restoration--input",
+                    "type": "number",
+                    "id": "year-restoration",
+                    "name": "year-restoration",
+                    "min": "0",
+                    "max": "9999",
+                    "required": True,
+                }
+            ),
+            "passepartout": forms.CheckboxInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__passepartout--input",
+                    "type": "checkbox",
+                    "id": "passepartout",
+                    "name": "passepartout",
+                    "required": True,
+                }
+            ),
+            "thickness": forms.NumberInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__thickness--input",
+                    "type": "number",
+                    "id": "thickness",
+                    "name": "thickness",
+                    "min": "0",
+                    "max": "9999",
+                    "required": True,
+                }
+            ),
+            "ph": forms.NumberInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__ph--input",
+                    "type": "number",
+                    "id": "ph",
+                    "name": "ph",
+                    "min": "0",
+                    "max": "14",
+                    "required": True,
+                }
+            ),
+            # Для дополнительных полей "Отчеты" вы можете добавить аналогичные атрибуты
+            "date": forms.DateInput(
+                attrs={"class": "reports__date--input", "type": "date", "id": "date", "name": "date"}
+            ),
+            "report": forms.FileInput(
+                attrs={"class": "reports__file--input", "type": "file", "id": "report", "name": "report"}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
