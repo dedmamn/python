@@ -77,7 +77,25 @@ class PaperForm(forms.ModelForm):
         model = Paper
         fields = "__all__"
         widgets = {
-            "authors": SelectizeMultiple(search_lookup="name__icontains"),
+            "code": forms.TextInput(
+                attrs={
+                    "class": "create-paper__element--input create-paper__code--input",
+                    "type": "text",
+                    "id": "code",
+                    "name": "code",
+                    "required": 1,
+                }
+            ),
+            "title": forms.TextInput(attrs={"class": "title-class"}),
+            "year_start": forms.NumberInput(attrs={"class": "year-start-class"}),
+            "year_end": forms.NumberInput(attrs={"class": "year-end-class"}),
+            "url": forms.URLInput(attrs={"class": "url-class"}),
+            "subtitle": forms.TextInput(attrs={"class": "subtitle-class"}),
+            "authors": forms.SelectMultiple(attrs={"class": "authors-class"}),
+            "year_restoration": forms.NumberInput(attrs={"class": "year-restoration-class"}),
+            "passepartout": forms.CheckboxInput(attrs={"class": "passepartout-class"}),
+            "thickness": forms.NumberInput(attrs={"class": "thickness-class"}),
+            "ph": forms.NumberInput(attrs={"class": "ph-class"}),
         }
 
     def __init__(self, *args, **kwargs):
