@@ -26,6 +26,7 @@
                 KRS
             </div>
         </div>
+        
         <div class="photo-and-research-area__main">
 
             <fieldset class="photo__images main__card card7">
@@ -38,30 +39,35 @@
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
                     <input class="images__bw-positive--input" type="file" id="bw-positive" name="bw-positive" >
-                    <img id="output_bw-positive" width="200" />
+                    <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                 </div>
                 
                 <div class="images__capture-date">
                     <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
                     <input class="images__capture-date--input" type="date" id="Capture-date" name="Capture-date" >
                 </div>
+                <div id="expanded-image">
+                    <img id="expanded-image-content" src="" alt="Увеличенное изображение">
+                </div>
             </fieldset>
             
             <fieldset class="photo__chem-images main__card card8">
 
                 <div class="chem-images__microscopy">
-                <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
-                <input class="chem-images__microscopy--input" type="file" id="microscopy" name="microscopy">
+                    <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
+                    <input class="chem-images__microscopy--input" type="file" id="microscopy" name="microscopy">
+                    <img id="output_microscopy" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                 </div>
                 <div class="chem-images__uf">
-                <label class="chem-images__uf--title" for="uf">Ультрафиолет</label>
-                <input class="chem-images__uf--input" type="file" id="uf" name="uf">
+                    <label class="chem-images__uf--title" for="uf">Ультрафиолет</label>
+                    <input class="chem-images__uf--input" type="file" id="uf" name="uf">
+                    <img id="output_uf" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                 </div>
                 <div class="chem-images__express">
-                <label class="chem-images__express--title" for="ExpressTest">Экспресс-тест</label>
-                <input class="chem-images__express--input"type="file" id="ExpressTest" name="ExpressTest">
+                    <label class="chem-images__express--title" for="ExpressTest">Экспресс-тест</label>
+                    <input class="chem-images__express--input"type="file" id="ExpressTest" name="ExpressTest">
+                    <img id="output_ExpressTest" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                 </div>
-
             </fieldset>
 
             <fieldset class="research__structure main__card card9">
@@ -241,19 +247,22 @@
     </form>
 
 </main>
+
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var loadFile = function(event) {
-            var output = document.getElementById('output_' + event.target.name);
-            output.src = URL.createObjectURL(event.target.files[0]);
+  document.addEventListener("DOMContentLoaded", function() {
+    var loadFile = function(event) {
+      var output = document.getElementById('output_' + event.target.name);
+      output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function() {
                 URL.revokeObjectURL(output.src) // освобождение памяти
             }
-        };
-    
+    };
+
         document.getElementById('color-positive').addEventListener('change', loadFile);
         document.getElementById('bw-positive').addEventListener('change', loadFile);
-    });
-    </script>
+  });
+</script>
+
+  
     
 {% endblock content%}
