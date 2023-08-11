@@ -15,19 +15,6 @@ class PaperList(generic.ListView):
     paginate_by = 10
 
 
-class PaperCreate(generic.CreateView):
-    model = Paper
-    template_name = "paper/addPaper.html"
-    form_class = PaperForm
-    success_url = "/"
-
-
-class PaperUpdate(generic.UpdateView):
-    model = Paper
-    template_name = "paper/addPaper.html"
-    form_class = PaperForm
-
-
 def create_paper(request):
     if request.method == "POST":
         form = PaperForm(request.POST, request.FILES)
@@ -38,8 +25,13 @@ def create_paper(request):
     else:
         form = PaperForm()
 
-    return render(request, "paper/detailPaper.html", {"form": form})
+    return render(request, "paper/createPaper.html", {"form": form})
 
+
+def detail_view(request, pk):
+    paper = get_object_or_404(Paper, id=pk)
+    context = {"paper": paper}
+    return render(request, "paper/detailPaper.html", context)
     # def detail_view(request):
     #     # Assuming you have a primary key for the Paper object you want to display
     #     paper_id = 1

@@ -129,7 +129,7 @@ class PaperForm(forms.ModelForm):
                     "type": "text",
                     "id": "subtitle",
                     "name": "subtitle",
-                    "required": True,
+                    # "required": True,
                 }
             ),
             "authors": forms.SelectMultiple(
@@ -158,7 +158,7 @@ class PaperForm(forms.ModelForm):
                     "name": "year-end",
                     "min": "0",
                     "max": "9999",
-                    "required": True,
+                    # "required": True,
                 }
             ),
             "url": forms.URLInput(
@@ -178,7 +178,7 @@ class PaperForm(forms.ModelForm):
                     "name": "year-restoration",
                     "min": "0",
                     "max": "9999",
-                    "required": True,
+                    # "required": True,
                 }
             ),
             "passepartout": forms.CheckboxInput(
@@ -187,7 +187,7 @@ class PaperForm(forms.ModelForm):
                     "type": "checkbox",
                     "id": "passepartout",
                     "name": "passepartout",
-                    "required": True,
+                    # "required": True,
                 }
             ),
             "thickness": forms.NumberInput(
@@ -198,7 +198,7 @@ class PaperForm(forms.ModelForm):
                     "name": "thickness",
                     "min": "0",
                     "max": "9999",
-                    "required": True,
+                    # "required": True,
                 }
             ),
             "ph": forms.NumberInput(
@@ -209,7 +209,7 @@ class PaperForm(forms.ModelForm):
                     "name": "ph",
                     "min": "0",
                     "max": "14",
-                    "required": True,
+                    # "required": True,
                 }
             ),
         }

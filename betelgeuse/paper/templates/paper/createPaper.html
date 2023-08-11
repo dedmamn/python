@@ -30,13 +30,6 @@
         
         <div class="photo-and-research-area__main">
 
-            <div class="image-date-buttons">
-                {% for image_form in form.image_formset %}
-                    <button onclick="selectImage({{ forloop.counter }})">
-                        {{ image_form.date_capture.value }}
-                    </button>
-                {% endfor %}
-            </div>
             <fieldset class="photo__images main__card card7">
                 {% for image_form in form.image_formset %}
                 <div class="images__color-positive">
