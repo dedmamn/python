@@ -46,7 +46,7 @@
                 
                 <div class="images__capture-date">
                     <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
-                    {{ image_form.capture_date }}
+                    {{ image_form.date_capture }}
                 </div>
                 {% endfor %}
                 <div id="expanded-image">
@@ -55,7 +55,6 @@
             </fieldset>
             
             <fieldset class="photo__chem-images main__card card8">
-
                 <div class="chem-images__microscopy">
                     <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
                     <input class="chem-images__microscopy--input" type="file" id="microscopy" name="microscopy">

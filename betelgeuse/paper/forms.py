@@ -24,9 +24,21 @@ class ImageForm(forms.ModelForm):
         model = Image
         fields = "__all__"
         widgets = {
-            "color_positive": forms.FileInput(attrs={"class": "images__color-positive--input", "id": "color-positive"}),
-            "bw_positive": forms.FileInput(attrs={"class": "images__bw-positive--input", "id": "bw-positive"}),
-            "capture_date": forms.DateInput(
+            "color_positive": forms.FileInput(
+                attrs={
+                    "class": "images__color-positive--input",
+                    "id": "color-positive",
+                    "onchange": "document.getElementById('output_color-positive').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "bw_positive": forms.FileInput(
+                attrs={
+                    "class": "images__bw-positive--input",
+                    "id": "bw-positive",
+                    "onchange": "document.getElementById('output_bw-positive').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "date_capture": forms.DateInput(
                 format=("%Y-%m-%d"),
                 attrs={"class": "images__capture-date--input", "id": "Capture-date", "type": "date"},
             ),
@@ -61,11 +73,11 @@ class HimImageForm(forms.ModelForm):
     class Meta:
         model = HimImage
         fields = "__all__"
-        # widgets = {
-        #     "microscopy": UploadedFileInput,
-        #     "uf": UploadedFileInput,
-        #     "express_test": UploadedFileInput,
-        # }
+        widgets = {
+            "microscopy": UploadedFileInput,
+            "uf": UploadedFileInput,
+            "express_test": UploadedFileInput,
+        }
 
 
 # class AuthorForm(forms.Widget):
