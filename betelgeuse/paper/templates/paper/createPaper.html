@@ -31,27 +31,24 @@
         <div class="photo-and-research-area__main">
 
             <fieldset class="photo__images main__card card7">
-                {% for image_form in form.image_formset %}
+               
                 <div class="images__color-positive">
                     <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
-                    {{ image_form.color_positive }}
                     <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.image_formset.0.color_positive }}
                 </div>
 
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
-                    {{ image_form.bw_positive }}
                     <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.image_formset.0.bw_positive }}
                 </div>
                 
                 <div class="images__capture-date">
                     <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
-                    {{ image_form.date_capture }}
+                    {{ form.image_formset.0.date_capture }}
                 </div>
-                {% endfor %}
-                <div id="expanded-image">
-                    <img id="expanded-image-content" src="" alt="Увеличенное изображение">
-                </div>
+            
             </fieldset>
             
             <fieldset class="photo__chem-images main__card card8">
@@ -267,15 +264,7 @@
         document.getElementById('color-positive').addEventListener('change', loadFile);
         document.getElementById('bw-positive').addEventListener('change', loadFile);
   });
-  function selectImage(index) {
-    // Скрыть все images-formset
-    let allImages = document.querySelectorAll('.images__color-positive');
-    allImages.forEach(img => img.style.display = 'none');
-    
-    // Показать выбранный images-formset
-    let selectedImage = document.querySelector(`.images__color-positive:nth-child(${index})`);
-    selectedImage.style.display = 'block';
-};
+  
 </script>
 
   
