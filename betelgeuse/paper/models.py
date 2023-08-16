@@ -5,14 +5,6 @@ from .tools import *
 from django.urls import reverse
 
 
-# Create your models here.
-# class Subtitle(models.Model):
-#     name = models.CharField(max_length=50)
-
-#     def __str__(self):
-#         return self.name
-
-
 class Author(models.Model):
     name = models.CharField(max_length=50)
 
@@ -32,7 +24,6 @@ class Paper(models.Model):
     passepartout = models.BooleanField()
     thickness = models.PositiveIntegerField(default=None, blank=True, null=True)
     ph = models.DecimalField(max_digits=5, decimal_places=3, default=None, blank=True, null=True)
-    # HimImage = models.OneToOneField(HimImage, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.code

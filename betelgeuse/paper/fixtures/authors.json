@@ -1,0 +1,1 @@
+[{"model": "paper.author", "pk": 1, "fields": {"name": "К. И. Коссе"}}, {"model": "paper.author", "pk": 2, "fields": {"name": "А.В. Курие"}}]
