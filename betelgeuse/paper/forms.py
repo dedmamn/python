@@ -11,10 +11,20 @@ class ReportForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "date": forms.DateInput(
-                attrs={"class": "reports__date--input", "type": "date", "id": "date", "name": "date"}
+                attrs={
+                    "class": "reports__date--input",
+                    "type": "date",
+                    "id": "date",
+                    "name": "date",
+                }
             ),
             "file": forms.FileInput(
-                attrs={"class": "reports__file--input", "type": "file", "id": "report", "name": "report"}
+                attrs={
+                    "class": "reports__file--input",
+                    "type": "file",
+                    "id": "report",
+                    "name": "report",
+                }
             ),
         }
 
@@ -29,6 +39,7 @@ class ImageForm(forms.ModelForm):
                     "class": "images__color-positive--input",
                     "id": "color-positive",
                     "onchange": "document.getElementById('output_color-positive').src = window.URL.createObjectURL(this.files[0])",
+                    "name": "color-positive",
                 }
             ),
             "bw_positive": forms.FileInput(
@@ -36,11 +47,17 @@ class ImageForm(forms.ModelForm):
                     "class": "images__bw-positive--input",
                     "id": "bw-positive",
                     "onchange": "document.getElementById('output_bw-positive').src = window.URL.createObjectURL(this.files[0])",
+                    "name": "bw-positive",
                 }
             ),
             "date_capture": forms.DateInput(
                 format=("%Y-%m-%d"),
-                attrs={"class": "images__capture-date--input", "id": "Capture-date", "type": "date"},
+                attrs={
+                    "class": "images__capture-date--input",
+                    "id": "Capture-date",
+                    "type": "date",
+                    "name": "Capture-date",
+                },
             ),
         }
 
@@ -49,24 +66,142 @@ class StructureResearchForm(forms.ModelForm):
     class Meta:
         model = StructureResearch
         fields = "__all__"
+        widgets = {
+            "hertzberg": forms.FileInput(
+                attrs={
+                    "class": "structure__hertzberg--input",
+                    "id": "hertzberg",
+                    "name": "hertzberg",
+                    "onchange": "document.getElementById('output_hertzberg').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "graf_c": forms.FileInput(
+                attrs={
+                    "class": "structure__graf-c--input",
+                    "id": "graf-c",
+                    "name": "graf-c",
+                    "onchange": "document.getElementById('output_graf-c').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "discription": forms.SelectMultiple(
+                attrs={
+                    "class": "structure__discription--input",
+                    "id": "discription",
+                    "name": "discription",
+                }
+            ),
+        }
 
 
 class RfaResearchForm(forms.ModelForm):
     class Meta:
         model = RfaResearch
         fields = "__all__"
+        widgets = {
+            "image": forms.FileInput(
+                attrs={
+                    "class": "rfa__image--input",
+                    "id": "RFA-image",
+                    "name": "RFA-image",
+                    "onchange": "document.getElementById('output_image').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "txt": forms.FileInput(
+                attrs={
+                    "class": "rfa__text--input",
+                    "id": "RFA-txt",
+                    "name": "RFA-txt",
+                    "onchange": "document.getElementById('output_txt').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "parameters": forms.Textarea(
+                attrs={
+                    "class": "rfa__parameters--input",
+                    "id": "RFA-parameters",
+                    "name": "RFA-parameters",
+                }
+            ),
+            "result": forms.Textarea(
+                attrs={
+                    "class": "rfa__result--input",
+                    "id": "RFA-result",
+                    "name": "RFA-result",
+                }
+            ),
+        }
 
 
 class FurieResearchForm(forms.ModelForm):
     class Meta:
         model = FurieResearch
         fields = "__all__"
+        widgets = {
+            "image": forms.FileInput(
+                attrs={
+                    "class": "furie__image--input",
+                    "id": "Furie-image",
+                    "name": "Furie-image",
+                    "onchange": "document.getElementById('output_image').src = window.URL.createObjectURL(this.files[0])",
+                }
+            ),
+            "txt": forms.FileInput(
+                attrs={
+                    "class": "furie__text--input",
+                    "id": "Furie-txt",
+                    "name": "Furie-txt",
+                }
+            ),
+            "parameters": forms.Textarea(
+                attrs={
+                    "class": "furie__parameters--input",
+                    "id": "Furie-parameters",
+                    "name": "Furie-parameters",
+                }
+            ),
+            "result": forms.Textarea(
+                attrs={
+                    "class": "furie__result--input",
+                    "id": "Furie-result",
+                    "name": "Furie-result",
+                }
+            ),
+        }
 
 
 class KrsResearchForm(forms.ModelForm):
     class Meta:
         model = KrsResearch
         fields = "__all__"
+        widgets = {
+            "image": forms.FileInput(
+                attrs={
+                    "class": "krs__image--input",
+                    "id": "KRS-image",
+                    "name": "KRS-image",
+                }
+            ),
+            "txt": forms.FileInput(
+                attrs={
+                    "class": "krs__txt--input",
+                    "id": "KRS-txt",
+                    "name": "KRS-txt",
+                }
+            ),
+            "parameters": forms.Textarea(
+                attrs={
+                    "class": "krs__parameters--input",
+                    "id": "KRS-parameters",
+                    "name": "KRS-parameters",
+                }
+            ),
+            "result": forms.Textarea(
+                attrs={
+                    "class": "krs__result--input",
+                    "id": "KRS-result",
+                    "name": "KRS-result",
+                }
+            ),
+        }
 
 
 class HimImageForm(forms.ModelForm):
@@ -74,9 +209,27 @@ class HimImageForm(forms.ModelForm):
         model = HimImage
         fields = "__all__"
         widgets = {
-            # "microscopy": UploadedFileInput,
-            # "uf": UploadedFileInput,
-            # "express_test": UploadedFileInput,
+            "microscopy": forms.FileInput(
+                attrs={
+                    "class": "chem-images__microscopy--input",
+                    "id": "microscopy",
+                    "name": "microscopy",
+                }
+            ),
+            "uf": forms.FileInput(
+                attrs={
+                    "class": "chem-images__uf--input",
+                    "id": "uf",
+                    "name": "uf",
+                }
+            ),
+            "express_test": forms.FileInput(
+                attrs={
+                    "class": "chem-images__express--input",
+                    "id": "ExpressTest",
+                    "name": "ExpressTest",
+                }
+            ),
         }
 
 
@@ -137,7 +290,7 @@ class PaperForm(forms.ModelForm):
                     "class": "create-paper__element--input create-paper__authors--input",
                     "id": "authors",
                     "name": "authors",
-                }
+                },
             ),
             "year_start": forms.NumberInput(
                 attrs={
@@ -216,31 +369,11 @@ class PaperForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PaperForm, self).__init__(*args, **kwargs)
-
-    # def save(self, commit=False):
-    #     instance = super(PaperForm, self).save(commit=commit)
-    #     if commit:
-    #         self.himImage_formset.instance = instance
-    #         self.himImage_formset.save()
-
-    #         self.report_formset.instance = instance
-    #         self.report_formset.save()
-
-    #         self.image_formset.instance = instance
-    #         self.image_formset.save()
-
-    #         self.structure_formset.instance = instance
-    #         self.structure_formset.save()
-
-    #         self.rfa_formset.instance = instance
-    #         self.rfa_formset.save()
-
-    #         self.furie_formset.instance = instance
-    #         self.furie_formset.save()
-
-    #         self.krs_formset.instance = instance
-    #         self.krs_formset.save()
-
-    #         instance.save()
-
-    #     return instance
+        # self.fields["authors"].widget = SelectizeMultiple(search_lookup="name__icontains")
+        # self.fields["authors"].queryset = Author.objects.all()
+        # self.fields["authors"].label = "Авторы"
+        # self.fields["authors"].required = True
+        # self.fields["authors"].help_text = "Выберите авторов"
+        # self.fields["authors"].error_messages = {"required": "Выберите авторов"}
+        # self.fields["authors"].empty_label = None
+        # self.fields["authors"].initial = Author.objects.all()

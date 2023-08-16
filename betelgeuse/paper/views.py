@@ -16,24 +16,47 @@ class PaperList(generic.ListView):
 
 
 def create_paper(request):
+    paper_form = PaperForm(request.POST or None, request.FILES)
     if request.method == "POST":
-        paper_form = PaperForm(request.POST or None, request.FILES)
-        images = ImageForm(request.POST or None, prefix="images")
-        reports = ReportForm(request.POST or None, prefix="reports")
-        structure_research = StructureResearchForm(request.POST or None, prefix="structure_research")
-        rfa_research = RfaResearchForm(request.POST or None, prefix="rfa_research")
-        furie_research = FurieResearchForm(request.POST or None, prefix="furie_research")
-        krs_research = KrsResearchForm(request.POST or None, prefix="krs_research")
-        him_image = HimImageForm(request.POST or None, prefix="him_image")
+        if paper_form.is_valid():
+            paper = paper_form.save(commit=False)
 
-    else:
-        form = PaperForm()
+            report_formset = PaperForm.report_formset(request.POST or None, request.FILES, instance=paper)
+            image_formset = PaperForm.image_formset(request.POST or None, request.FILES, instance=paper)
+            himImage_formset = PaperForm.himImage_formset(request.POST or None, request.FILES, instance=paper)
+            structureResearch_formset = PaperForm.structure_formset(request.POST or None, request.FILES, instance=paper)
+            rfaResearch_formset = PaperForm.rfa_formset(request.POST or None, request.FILES, instance=paper)
+            furieResearch_formset = PaperForm.furie_formset(request.POST or None, request.FILES, instance=paper)
+            krsResearch_formset = PaperForm.krs_formset(request.POST or None, request.FILES, instance=paper)
+
+            if (
+                report_formset.is_valid()
+                and image_formset.is_valid()
+                and himImage_formset.is_valid()
+                and structureResearch_formset.is_valid()
+                and rfaResearch_formset.is_valid()
+                and furieResearch_formset.is_valid()
+                and krsResearch_formset.is_valid()
+            ):
+                paper.save()
+
+                report_formset.save()
+                image_formset.save()
+                himImage_formset.save()
+                structureResearch_formset.save()
+                rfaResearch_formset.save()
+                furieResearch_formset.save()
+                krsResearch_formset.save()
+
+                return HttpResponseRedirect("/")
+            else:
+                pass
 
     return render(
         request,
         "paper/createPaper.html",
         {
-            "form": form,
+            "form": paper_form,
         },
     )
 

@@ -116,6 +116,6 @@ class FurieResearch(models.Model):
 class KrsResearch(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="krs_set")
     image = models.ImageField(upload_to=krs_upload_path)
-    txt = models.FileField(upload_to=furie_upload_path, blank=True, null=True)
+    txt = models.FileField(upload_to=krs_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
