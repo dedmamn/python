@@ -17,78 +17,28 @@ class PaperList(generic.ListView):
 
 def create_paper(request):
     if request.method == "POST":
-        form = PaperForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            # Перенаправление на нужную страницу после успешного сохранения
-            return HttpResponseRedirect("/")
+        paper_form = PaperForm(request.POST or None, request.FILES)
+        images = ImageForm(request.POST or None, prefix="images")
+        reports = ReportForm(request.POST or None, prefix="reports")
+        structure_research = StructureResearchForm(request.POST or None, prefix="structure_research")
+        rfa_research = RfaResearchForm(request.POST or None, prefix="rfa_research")
+        furie_research = FurieResearchForm(request.POST or None, prefix="furie_research")
+        krs_research = KrsResearchForm(request.POST or None, prefix="krs_research")
+        him_image = HimImageForm(request.POST or None, prefix="him_image")
+
     else:
         form = PaperForm()
 
-    return render(request, "paper/createPaper.html", {"form": form})
+    return render(
+        request,
+        "paper/createPaper.html",
+        {
+            "form": form,
+        },
+    )
 
 
 def detail_view(request, pk):
     paper = get_object_or_404(Paper, id=pk)
     context = {"paper": paper}
     return render(request, "paper/detailPaper.html", context)
-    # def detail_view(request):
-    #     # Assuming you have a primary key for the Paper object you want to display
-    #     paper_id = 1
-
-    #     paper_instance = Paper.objects.get(pk=paper_id)
-
-    #     # Assuming you have a queryset to get all related research objects for the Paper instance
-    #     reports = paper_instance.report_set.all()
-    #     images = paper_instance.image_set.all()
-    #     # ... and so on for other related research objects
-
-    #     context = {
-    #         "paper_instance": paper_instance,
-    #         "reports": reports,
-    #         "images": images,
-    #         # ... and other related research objects
-    #     }
-
-    return render(request, "paper/detailPaper.html", context)
-
-
-# def index(request):
-#     papers = Paper.objects.all()
-#     return render(request, "paper/index.html", {"papers": papers})
-
-
-# def detail(request, paper_id):
-#     paper = get_object_or_404(Paper, id=paper_id)
-#     # paper = Paper.objects.get(pk=paper_id)
-#     form = PaperForm(instance=paper)
-#     return render(request, "paper/addPaper.html", {"paper_from": form})
-
-
-# def updatePaper(request, pk):
-#     if request.method == "POST":
-#         form = PaperForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return index(request)
-#     else:
-#         paper = Paper.objects.get(pk=pk)
-#         form = PaperForm(instance=paper)
-
-#     return render(request, "paper/addPaper.html", {"paper_form": form})
-
-
-# def addPaper(request):
-#     if request.method == "POST":
-#         form = PaperForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return index(request)
-#     else:
-#         form = PaperForm()
-
-#     return render(request, "paper/addPaper.html", {"paper_form": form})
-
-
-# def about(request):
-#     return HttpResponse("<h1>О проекте</h1>")

@@ -6,7 +6,6 @@
     <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="photo-and-research-area">
-
             <div class="photo-and-research-area__tabs">
             <div class="photo__images--tab tabs__card card1 " onclick="tab(1); hideCards('card7', 'card12'); showCard('card1'); showCard('card7')">
                 Фото
@@ -54,18 +53,18 @@
             <fieldset class="photo__chem-images main__card card8">
                 <div class="chem-images__microscopy">
                     <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
-                    <input class="chem-images__microscopy--input" type="file" id="microscopy" name="microscopy">
                     <img id="output_microscopy" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.himImage_formset.0.microscopy }}
                 </div>
                 <div class="chem-images__uf">
                     <label class="chem-images__uf--title" for="uf">Ультрафиолет</label>
-                    <input class="chem-images__uf--input" type="file" id="uf" name="uf">
                     <img id="output_uf" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.himImage_formset.0.uf }}
                 </div>
                 <div class="chem-images__express">
                     <label class="chem-images__express--title" for="ExpressTest">Экспресс-тест</label>
-                    <input class="chem-images__express--input"type="file" id="ExpressTest" name="ExpressTest">
                     <img id="output_ExpressTest" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.himImage_formset.0.express }}
                 </div>
             </fieldset>
 
@@ -264,7 +263,7 @@
         document.getElementById('color-positive').addEventListener('change', loadFile);
         document.getElementById('bw-positive').addEventListener('change', loadFile);
   });
-  
+
 </script>
 
   
