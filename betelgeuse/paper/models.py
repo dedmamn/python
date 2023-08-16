@@ -57,9 +57,9 @@ class HimImage(models.Model):
 
 class Image(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="image_set")
-    bw_positive = models.ImageField(upload_to=image_upload_path)
-    color_positive = models.ImageField(upload_to=image_upload_path)
-    date_capture = models.DateField(default=timezone.now)
+    bw_positive = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
+    color_positive = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
+    date_capture = models.DateField(default=timezone.now, blank=True, null=True)
 
     def __str__(self):
         return f"Image {self.id}"
@@ -67,8 +67,8 @@ class Image(models.Model):
 
 class Report(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="report_set")
-    date = models.DateField(default=timezone.now)
-    file = models.FileField(upload_to=report_upload_path)
+    date = models.DateField(default=timezone.now, blank=True, null=True)
+    file = models.FileField(upload_to=report_upload_path, blank=True, null=True)
 
 
 class Material(models.Model):
@@ -87,7 +87,7 @@ class StructureResearch(models.Model):
 
 class RfaResearch(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="rfa_set")
-    image = models.ImageField(upload_to=rfa_upload_path)
+    image = models.ImageField(upload_to=rfa_upload_path, blank=True, null=True)
     txt = models.FileField(upload_to=rfa_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
@@ -95,7 +95,7 @@ class RfaResearch(models.Model):
 
 class FurieResearch(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="furie_set")
-    image = models.ImageField(upload_to=furie_upload_path)
+    image = models.ImageField(upload_to=furie_upload_path, blank=True, null=True)
     txt = models.FileField(upload_to=furie_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
@@ -106,7 +106,7 @@ class FurieResearch(models.Model):
 
 class KrsResearch(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="krs_set")
-    image = models.ImageField(upload_to=krs_upload_path)
+    image = models.ImageField(upload_to=krs_upload_path, blank=True, null=True)
     txt = models.FileField(upload_to=krs_upload_path, blank=True, null=True)
     parameters = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
