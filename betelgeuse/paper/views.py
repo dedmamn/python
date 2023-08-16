@@ -36,7 +36,7 @@ def create_paper(request):
                     if formset.is_valid():
                         formset.save()
                     else:
-                        # print(formset.errors)
+                        print(formset.errors)
                         all_valid = False
 
             if all_valid:

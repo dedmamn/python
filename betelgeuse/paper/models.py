@@ -59,7 +59,7 @@ class Image(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="image_set")
     bw_positive = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
     color_positive = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
-    date_capture = models.DateField(default=timezone.now, blank=True, null=True)
+    date_capture = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f"Image {self.id}"
@@ -67,7 +67,7 @@ class Image(models.Model):
 
 class Report(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="report_set")
-    date = models.DateField(default=timezone.now, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
     file = models.FileField(upload_to=report_upload_path, blank=True, null=True)
 
 
