@@ -29,14 +29,41 @@ def create_paper(request):
             furieResearch_formset = PaperForm.furie_formset(request.POST or None, request.FILES, instance=paper)
             krsResearch_formset = PaperForm.krs_formset(request.POST or None, request.FILES, instance=paper)
 
+            is_report_valid = (
+                not any(request.POST.get(prefix, "") for prefix in report_formset.prefix) or report_formset.is_valid()
+            )
+            is_image_valid = (
+                not any(request.POST.get(prefix, "") for prefix in image_formset.prefix) or image_formset.is_valid()
+            )
+            is_himImage_valid = (
+                not any(request.POST.get(prefix, "") for prefix in himImage_formset.prefix)
+                or himImage_formset.is_valid()
+            )
+            is_structureResearch_valid = (
+                not any(request.POST.get(prefix, "") for prefix in structureResearch_formset.prefix)
+                or structureResearch_formset.is_valid()
+            )
+            is_rfaResearch_valid = (
+                not any(request.POST.get(prefix, "") for prefix in rfaResearch_formset.prefix)
+                or rfaResearch_formset.is_valid()
+            )
+            is_furieResearch_valid = (
+                not any(request.POST.get(prefix, "") for prefix in furieResearch_formset.prefix)
+                or furieResearch_formset.is_valid()
+            )
+            is_krsResearch_valid = (
+                not any(request.POST.get(prefix, "") for prefix in krsResearch_formset.prefix)
+                or krsResearch_formset.is_valid()
+            )
+
             if (
-                report_formset.is_valid()
-                and image_formset.is_valid()
-                and himImage_formset.is_valid()
-                and structureResearch_formset.is_valid()
-                and rfaResearch_formset.is_valid()
-                and furieResearch_formset.is_valid()
-                and krsResearch_formset.is_valid()
+                is_report_valid
+                and is_image_valid
+                and is_himImage_valid
+                and is_structureResearch_valid
+                and is_rfaResearch_valid
+                and is_furieResearch_valid
+                and is_krsResearch_valid
             ):
                 paper.save()
 
@@ -50,7 +77,13 @@ def create_paper(request):
 
                 return HttpResponseRedirect("/")
             else:
-                pass
+                print(report_formset.errors)
+                print(image_formset.errors)
+                print(himImage_formset.errors)
+                print(structureResearch_formset.errors)
+                print(rfaResearch_formset.errors)
+                print(furieResearch_formset.errors)
+                print(krsResearch_formset.errors)
 
     return render(
         request,
