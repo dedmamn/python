@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from .tools import *
 from django.urls import reverse
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 
 class Author(models.Model):
@@ -28,10 +30,10 @@ class Paper(models.Model):
     def __str__(self):
         return self.code
 
-    def get_latest_image(self):
+    def get_preview_image(self):
         latest_paper_image = self.image_set.order_by("-date_capture").first()
         if latest_paper_image:
-            return latest_paper_image.color_positive
+            return latest_paper_image.preview
 
     # def get_subtitles_as_string(self):
     #     return ", ".join([subtitle.name for subtitle in self.subtitles.all()])
@@ -59,6 +61,7 @@ class Image(models.Model):
     paper = models.ForeignKey(Paper, on_delete=models.CASCADE, related_name="image_set")
     bw_positive = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
     color_positive = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
+    preview = ImageSpecField(source="color_positive", processors=[ResizeToFill(600, 350)], format="JPEG")
     date_capture = models.DateField(blank=True, null=True)
 
     def __str__(self):

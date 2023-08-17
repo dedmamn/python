@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "image_uploader_widget",
     "paper",
     "debug_toolbar",
+    "imagekit",
 ]
 
 MIDDLEWARE = [
