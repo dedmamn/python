@@ -3,6 +3,7 @@ from .models import *
 from django_selectize import forms as s2forms
 from formset.widgets import DateInput, Selectize, UploadedFileInput, SelectizeMultiple
 from django.views.generic.edit import FormView
+from image_uploader_widget.widgets import ImageUploaderWidget
 
 
 class ReportForm(forms.ModelForm):
@@ -34,21 +35,21 @@ class ImageForm(forms.ModelForm):
         model = Image
         fields = "__all__"
         widgets = {
-            "color_positive": forms.FileInput(
-                attrs={
-                    "class": "images__color-positive--input",
-                    "id": "color-positive",
-                    "onchange": "document.getElementById('output_color-positive').src = window.URL.createObjectURL(this.files[0])",
-                    "name": "color-positive",
-                }
+            "color_positive": ImageUploaderWidget(
+                # attrs={
+                #     "class": "images__color-positive--input",
+                #     "id": "color-positive",
+                #     "onchange": "document.getElementById('output_color-positive').src = window.URL.createObjectURL(this.files[0])",
+                #     "name": "color-positive",
+                # }
             ),
-            "bw_positive": forms.FileInput(
-                attrs={
-                    "class": "images__bw-positive--input",
-                    "id": "bw-positive",
-                    "onchange": "document.getElementById('output_bw-positive').src = window.URL.createObjectURL(this.files[0])",
-                    "name": "bw-positive",
-                }
+            "bw_positive": ImageUploaderWidget(
+                # attrs={
+                #     "class": "images__bw-positive--input",
+                #     "id": "bw-positive",
+                #     "onchange": "document.getElementById('output_bw-positive').src = window.URL.createObjectURL(this.files[0])",
+                #     "name": "bw-positive",
+                # }
             ),
             "date_capture": forms.DateInput(
                 format=("%Y-%m-%d"),

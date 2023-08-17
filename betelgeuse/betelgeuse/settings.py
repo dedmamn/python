@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "paper",
     "debug_toolbar",
     "formset",
+    "image_uploader_widget",
 ]
 
 MIDDLEWARE = [

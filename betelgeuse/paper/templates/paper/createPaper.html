@@ -33,13 +33,13 @@
                {{ form.image_formset.management_form }}
                 <div class="images__color-positive">
                     <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
-                    <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {% comment %} <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/> {% endcomment %}
                     {{ form.image_formset.0.color_positive }}
                 </div>
 
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
-                    <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {% comment %} <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/> {% endcomment %}
                     {{ form.image_formset.0.bw_positive }}
                 </div>
                 
