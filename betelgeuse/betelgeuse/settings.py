@@ -41,10 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "image_uploader_widget",
     "paper",
     "debug_toolbar",
-    "formset",
-    "image_uploader_widget",
 ]
 
 MIDDLEWARE = [

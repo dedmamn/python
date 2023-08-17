@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
 from django_selectize import forms as s2forms
-from formset.widgets import DateInput, Selectize, UploadedFileInput, SelectizeMultiple
 from django.views.generic.edit import FormView
 from image_uploader_widget.widgets import ImageUploaderWidget
 
@@ -11,7 +10,7 @@ class ReportForm(forms.ModelForm):
         model = Report
         fields = "__all__"
         widgets = {
-            "date": forms.DateInput(
+            "date": forms.DateTimeInput(
                 attrs={
                     "class": "reports__date--input",
                     "type": "date",
@@ -36,22 +35,20 @@ class ImageForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "color_positive": ImageUploaderWidget(
-                # attrs={
-                #     "class": "images__color-positive--input",
-                #     "id": "color-positive",
-                #     "onchange": "document.getElementById('output_color-positive').src = window.URL.createObjectURL(this.files[0])",
-                #     "name": "color-positive",
-                # }
+                attrs={
+                    "class": "images__color-positive--input",
+                    "id": "color-positive",
+                    "name": "color-positive",
+                }
             ),
             "bw_positive": ImageUploaderWidget(
-                # attrs={
-                #     "class": "images__bw-positive--input",
-                #     "id": "bw-positive",
-                #     "onchange": "document.getElementById('output_bw-positive').src = window.URL.createObjectURL(this.files[0])",
-                #     "name": "bw-positive",
-                # }
+                attrs={
+                    "class": "images__bw-positive--input",
+                    "id": "bw-positive",
+                    "name": "bw-positive",
+                }
             ),
-            "date_capture": forms.DateInput(
+            "date_capture": forms.DateTimeInput(
                 format=("%Y-%m-%d"),
                 attrs={
                     "class": "images__capture-date--input",
@@ -68,20 +65,18 @@ class StructureResearchForm(forms.ModelForm):
         model = StructureResearch
         fields = "__all__"
         widgets = {
-            "hertzberg": forms.FileInput(
+            "hertzberg": ImageUploaderWidget(
                 attrs={
                     "class": "structure__hertzberg--input",
                     "id": "hertzberg",
                     "name": "hertzberg",
-                    "onchange": "document.getElementById('output_hertzberg').src = window.URL.createObjectURL(this.files[0])",
                 }
             ),
-            "graf_c": forms.FileInput(
+            "graf_c": ImageUploaderWidget(
                 attrs={
                     "class": "structure__graf-c--input",
                     "id": "graf-c",
                     "name": "graf-c",
-                    "onchange": "document.getElementById('output_graf-c').src = window.URL.createObjectURL(this.files[0])",
                 }
             ),
             "discription": forms.SelectMultiple(
@@ -99,12 +94,11 @@ class RfaResearchForm(forms.ModelForm):
         model = RfaResearch
         fields = "__all__"
         widgets = {
-            "image": forms.FileInput(
+            "image": ImageUploaderWidget(
                 attrs={
                     "class": "rfa__image--input",
                     "id": "RFA-image",
                     "name": "RFA-image",
-                    "onchange": "document.getElementById('output_image').src = window.URL.createObjectURL(this.files[0])",
                 }
             ),
             "txt": forms.FileInput(
@@ -112,7 +106,6 @@ class RfaResearchForm(forms.ModelForm):
                     "class": "rfa__text--input",
                     "id": "RFA-txt",
                     "name": "RFA-txt",
-                    "onchange": "document.getElementById('output_txt').src = window.URL.createObjectURL(this.files[0])",
                 }
             ),
             "parameters": forms.Textarea(
@@ -137,12 +130,11 @@ class FurieResearchForm(forms.ModelForm):
         model = FurieResearch
         fields = "__all__"
         widgets = {
-            "image": forms.FileInput(
+            "image": ImageUploaderWidget(
                 attrs={
                     "class": "furie__image--input",
                     "id": "Furie-image",
                     "name": "Furie-image",
-                    "onchange": "document.getElementById('output_image').src = window.URL.createObjectURL(this.files[0])",
                 }
             ),
             "txt": forms.FileInput(
@@ -174,7 +166,7 @@ class KrsResearchForm(forms.ModelForm):
         model = KrsResearch
         fields = "__all__"
         widgets = {
-            "image": forms.FileInput(
+            "image": ImageUploaderWidget(
                 attrs={
                     "class": "krs__image--input",
                     "id": "KRS-image",
@@ -210,21 +202,21 @@ class HimImageForm(forms.ModelForm):
         model = HimImage
         fields = "__all__"
         widgets = {
-            "microscopy": forms.FileInput(
+            "microscopy": ImageUploaderWidget(
                 attrs={
                     "class": "chem-images__microscopy--input",
                     "id": "microscopy",
                     "name": "microscopy",
                 }
             ),
-            "uf": forms.FileInput(
+            "uf": ImageUploaderWidget(
                 attrs={
                     "class": "chem-images__uf--input",
                     "id": "uf",
                     "name": "uf",
                 }
             ),
-            "express_test": forms.FileInput(
+            "express_test": ImageUploaderWidget(
                 attrs={
                     "class": "chem-images__express--input",
                     "id": "ExpressTest",
@@ -283,7 +275,6 @@ class PaperForm(forms.ModelForm):
                     "type": "text",
                     "id": "subtitle",
                     "name": "subtitle",
-                    # "required": True,
                 }
             ),
             "authors": forms.SelectMultiple(
@@ -312,7 +303,6 @@ class PaperForm(forms.ModelForm):
                     "name": "year-end",
                     "min": "0",
                     "max": "9999",
-                    # "required": True,
                 }
             ),
             "url": forms.URLInput(
@@ -332,7 +322,6 @@ class PaperForm(forms.ModelForm):
                     "name": "year-restoration",
                     "min": "0",
                     "max": "9999",
-                    # "required": True,
                 }
             ),
             "passepartout": forms.CheckboxInput(
@@ -341,7 +330,6 @@ class PaperForm(forms.ModelForm):
                     "type": "checkbox",
                     "id": "passepartout",
                     "name": "passepartout",
-                    # "required": True,
                 }
             ),
             "thickness": forms.NumberInput(
@@ -352,7 +340,6 @@ class PaperForm(forms.ModelForm):
                     "name": "thickness",
                     "min": "0",
                     "max": "9999",
-                    # "required": True,
                 }
             ),
             "ph": forms.NumberInput(
@@ -363,18 +350,9 @@ class PaperForm(forms.ModelForm):
                     "name": "ph",
                     "min": "0",
                     "max": "14",
-                    # "required": True,
                 }
             ),
         }
 
     def __init__(self, *args, **kwargs):
         super(PaperForm, self).__init__(*args, **kwargs)
-        # self.fields["authors"].widget = SelectizeMultiple(search_lookup="name__icontains")
-        # self.fields["authors"].queryset = Author.objects.all()
-        # self.fields["authors"].label = "Авторы"
-        # self.fields["authors"].required = True
-        # self.fields["authors"].help_text = "Выберите авторов"
-        # self.fields["authors"].error_messages = {"required": "Выберите авторов"}
-        # self.fields["authors"].empty_label = None
-        # self.fields["authors"].initial = Author.objects.all()

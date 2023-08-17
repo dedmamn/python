@@ -31,15 +31,14 @@
 
             <fieldset class="photo__images main__card card7">
                {{ form.image_formset.management_form }}
+               {{ form.image_formset.0.media }}
                 <div class="images__color-positive">
                     <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
-                    {% comment %} <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/> {% endcomment %}
                     {{ form.image_formset.0.color_positive }}
                 </div>
 
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
-                    {% comment %} <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/> {% endcomment %}
                     {{ form.image_formset.0.bw_positive }}
                 </div>
                 
@@ -54,17 +53,14 @@
                 {{ form.himImage_formset.management_form }}
                 <div class="chem-images__microscopy">
                     <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
-                    <img id="output_microscopy" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                     {{ form.himImage_formset.0.microscopy }}
                 </div>
                 <div class="chem-images__uf">
                     <label class="chem-images__uf--title" for="uf">Ультрафиолет</label>
-                    <img id="output_uf" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                     {{ form.himImage_formset.0.uf }}
                 </div>
                 <div class="chem-images__express">
                     <label class="chem-images__express--title" for="ExpressTest">Экспресс-тест</label>
-                    <img id="output_ExpressTest" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
                     {{ form.himImage_formset.0.express_test }}
                 </div>
             </fieldset>
@@ -237,24 +233,5 @@
     </form>
     
 
-</main>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var loadFile = function(event) {
-      var output = document.getElementById('output_' + event.target.name);
-      output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // освобождение памяти
-            }
-    };
-
-        document.getElementById('color-positive').addEventListener('change', loadFile);
-        document.getElementById('bw-positive').addEventListener('change', loadFile);
-  });
-
-</script>
-
-  
-    
+</main>    
 {% endblock content%}

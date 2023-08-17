@@ -6,7 +6,6 @@ dill==0.3.6
 Django==4.2.2
 django-appconf==1.0.5
 django-debug-toolbar==4.1.0
-django-formset==1.0
 django-image-uploader-widget==0.2.5
 django-select2==8.1.2
 django-selectize==2.0
