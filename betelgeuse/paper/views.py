@@ -57,13 +57,9 @@ def create_paper(request):
 def updatePaper(request, pk):
     paper = Paper.objects.get(id=pk)
     form = PaperForm(request.POST or None, instance=paper)
+    images = Image.objects.filter(paper=paper)
+    context = {"form": form, "images": images}
     if form.is_valid():
         form.save()
         return HttpResponseRedirect("/")
-    return render(request, "paper/createPaper.html", {"form": form})
-
-
-def detail_view(request, pk):
-    paper = get_object_or_404(Paper, id=pk)
-    context = {"form": paper}
-    return render(request, "paper/detailPaper.html", context)
+    return render(request, "paper/createPaper.html", context)
