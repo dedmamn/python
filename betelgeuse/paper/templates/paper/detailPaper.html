@@ -6,7 +6,6 @@
     <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="photo-and-research-area">
-
             <div class="photo-and-research-area__tabs">
             <div class="photo__images--tab tabs__card card1 " onclick="tab(1); hideCards('card7', 'card12'); showCard('card1'); showCard('card7')">
                 Фото
@@ -30,145 +29,125 @@
         
         <div class="photo-and-research-area__main">
 
-            <div class="image-date-buttons">
-                {% for image_form in form.image_formset %}
-                    <button onclick="selectImage({{ forloop.counter }})">
-                        {{ image_form.date_capture.value }}
-                    </button>
-                {% endfor %}
-            </div>
             <fieldset class="photo__images main__card card7">
-                {% for image_form in form.image_formset %}
+               {{ form.image_formset.management_form }}
+               {{ form.image_set.0.media }}
                 <div class="images__color-positive">
                     <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
-                    {{ image_form.color_positive }}
-                    <img id="output_color-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.image_set.0.color_positive }}
                 </div>
 
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
-                    {{ image_form.bw_positive }}
-                    <img id="output_bw-positive" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.image_formset.0.bw_positive }}
                 </div>
                 
                 <div class="images__capture-date">
                     <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
-                    {{ image_form.date_capture }}
+                    {{ form.image_formset.0.date_capture }}
                 </div>
-                {% endfor %}
-                <div id="expanded-image">
-                    <img id="expanded-image-content" src="" alt="Увеличенное изображение">
-                </div>
+            
             </fieldset>
             
             <fieldset class="photo__chem-images main__card card8">
+                {{ form.himImage_formset.management_form }}
                 <div class="chem-images__microscopy">
                     <label class="chem-images__microscopy--title" for="microscopy">Микроскопия</label>
-                    <input class="chem-images__microscopy--input" type="file" id="microscopy" name="microscopy">
-                    <img id="output_microscopy" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.himImage_formset.0.microscopy }}
                 </div>
                 <div class="chem-images__uf">
                     <label class="chem-images__uf--title" for="uf">Ультрафиолет</label>
-                    <input class="chem-images__uf--input" type="file" id="uf" name="uf">
-                    <img id="output_uf" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.himImage_formset.0.uf }}
                 </div>
                 <div class="chem-images__express">
                     <label class="chem-images__express--title" for="ExpressTest">Экспресс-тест</label>
-                    <input class="chem-images__express--input"type="file" id="ExpressTest" name="ExpressTest">
-                    <img id="output_ExpressTest" width="200" src="{% static 'paper/img/image_holder.jpeg' %}"/>
+                    {{ form.himImage_formset.0.express_test }}
                 </div>
             </fieldset>
 
             <fieldset class="research__structure main__card card9">
-                
+                {{ form.structure_formset.management_form }}
                 <div class="structure__hertzberg">
                     <label class="structure__hertzberg--title" for="hertzberg">Хертзберг</label>
-                    <input class="structure__hertzberg--input"type="file" id="hertzberg" name="hertzberg">
+                    {{ form.structure_formset.0.hertzberg }}
                 </div>
                 <div class="structure__graf-c">
                     <label class="structure__graf-c--title" for="graf-c">Граф C</label>
-                    <input class="structure__graf-c--input"type="file" id="graf-c" name="graf-c">
+                    {{ form.structure_formset.0.graf_c }}
                 </div>
 
                 <div class="structure__description">
-                <label class="structure__description--title" for="description">Описание</label>
-                    <select class="structure__description--input" id="description" name="description" multiple>
-                    <option value="materil1">materil1</option>
-                    <option value="materil1">materil2</option>
-                    </select>
+                    <label class="structure__description--title" for="description">Описание</label>
+                    {{ form.structure_formset.0.description }}
                 </div>
             </fieldset>
         
             
             <fieldset class="research__element research__rfa main__card card10 ">
-                
+                {{ form.rfa_formset.management_form }}
                 <div class="rfa__image">
                     <label class="rfa__image--title" for="RFA-image">Изображение</label>
-                    <input class="rfa__image--input" type="file" id="RFA-image" name="RFA-image">
+                    {{ form.rfa_formset.0.image }}
                 </div>
 
                 <div class="rfa__text">
                     <label class="rfa__text--title" for="RFA-txt">Txt</label>
-                    <input class="rfa__text--input" type="file" id="RFA-txt" name="RFA-txt">
+                    {{ form.rfa_formset.0.txt }}
                 </div>
                 <div class="rfa__parameters">
                     <label class="rfa__parameters--title" for="RFA-parameters">Параметры</label>
-                    <textarea class="rfa__parameters--input" id="RFA-parameters" name="RFA-parameters" ></textarea>
+                    {{ form.rfa_formset.0.parameters }}
                 </div>
                 <div class="rfa__result">
-                <label class="rfa__result--title" for="RFA-result">Результат</label>
-                <textarea class="rfa__result--input" id="RFA-result" name="RFA-result" ></textarea>
+                    <label class="rfa__result--title" for="RFA-result">Результат</label>
+                    {{ form.rfa_formset.0.result }}
                 </div>
             </fieldset>
 
             
             <fieldset class="research__element research__furie main__card card11">
-
+                {{ form.furie_formset.management_form }}
                 <div class="furie__image">
-
-                <label class="furie__image--title" for="Furie-image">Изображение</label>
-                <input class="furie__image--input" type="file" id="Furie-image" name="Furie-image">
+                    <label class="furie__image--title" for="Furie-image">Изображение</label>
+                    {{ form.furie_formset.0.image }}
                 </div>
 
                 <div class="furie__text">
-
-                <label class="furie__text--title" for="Furie-txt">Txt</label>
-                <input class="furie__text--input" type="file" id="Furie-txt" name="Furie-txt">
+                    <label class="furie__text--title" for="Furie-txt">Txt</label>
+                    {{ form.furie_formset.0.txt }}
                 </div>
+                
                 <div class="furie__parameters">
-
-                <label class="furie__parameters--title" for="Furie-parameters">Параметры</label>
-                <textarea class="furie__parameters--input" id="Furie-parameters" name="Furie-parameters" ></textarea>
+                    <label class="furie__parameters--title" for="Furie-parameters">Параметры</label>
+                    {{ form.furie_formset.0.parameters }}
                 </div>
+                
                 <div class="furie__result">
-
-                <label class="furie__result--title" for="Furie-result">Результат</label>
-                <textarea class="furie__result--input" id="Furie-result" name="Furie-result" ></textarea>
-            </div>
+                    <label class="furie__result--title" for="Furie-result">Результат</label>
+                    {{ form.furie_formset.0.result }}
+                </div>
             </fieldset>
             
             <fieldset class="research__element research__krs main__card card12">
+                {{ form.krs_formset.management_form }}
                 <div class="krs__image">
-                <label class="krs__image--title" for="KRS-image">Изображение</label>
-                <input class="krs__image--input" type="file" id="KRS-image" name="KRS-image">
+                    <label class="krs__image--title" for="KRS-image">Изображение</label>
+                    {{ form.krs_formset.0.image }}
                 </div>
 
                 <div class="krs__txt">
-
-                <label  class="krs__txt--title" for="KRS-txt">Txt</label>
-                <input  class="krs__txt--input" type="file" id="KRS-txt" name="KRS-txt">
+                    <label  class="krs__txt--title" for="KRS-txt">Txt</label>
+                    {{ form.krs_formset.0.txt }}
                 </div>
 
                 <div class="krs__parameters">
-
-                <label  class="krs__parameters--title"for="KRS-parameters">Параметры</label>
-                <textarea class="krs__parameters--input" id="KRS-parameters" name="KRS-parameters" ></textarea>
+                    <label  class="krs__parameters--title"for="KRS-parameters">Параметры</label>
+                    {{ form.krs_formset.0.parameters }}
                 </div>
 
                 <div class="krs__result">
-
-                <label class="krs__result--title" for="KRS-result">Результат</label>
-                <textarea  class="krs__result--input"id="KRS-result" name="KRS-result" ></textarea>
+                    <label class="krs__result--title" for="KRS-result">Результат</label>
+                    {{ form.krs_formset.0.result }}
                 </div>
             </fieldset>
         </div>
@@ -196,8 +175,6 @@
                 <div class="create-paper__authors create-paper__element">
                     <label class="create-paper__element--title create-paper__authors--title" for="authors">Автор(ы)</label>
                     {{ form.authors }}
-                    <option value="author1">Author 1</option>
-                    <option value="author2">Author 2</option>
                 </div>
             
                 <div class="create-paper__year create-paper__element">
@@ -237,54 +214,24 @@
         </fieldset>
 
         <fieldset class="reports">
+            {{ form.report_formset.management_form }}
             <h3 class="reports__legend"><u>Отчеты</u></h3>
 
             <div class="reports__date">
                 <label class="reports__date--title" for="date">Дата написания отчета</label>
-                {% for report_form in form.report_formset %}
-                    {{ report_form.date }}
-                {% endfor %}
-                
+                {{ form.report_formset.0.date }}
             </div>
 
             <div class="reports__file">
                 <label class="reports__file--title" for="report">Файл отчета</label>
-                {% for report_form in form.report_formset %}    
-                    {{ report_form.file }}  
-                {% endfor %}
+                {{ form.report_formset.0.file }}
             </div>
 
         </fieldset> 
         <input class="submit" type="submit" value="Сохранить">
     </div>
     </form>
-
-</main>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var loadFile = function(event) {
-      var output = document.getElementById('output_' + event.target.name);
-      output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // освобождение памяти
-            }
-    };
-
-        document.getElementById('color-positive').addEventListener('change', loadFile);
-        document.getElementById('bw-positive').addEventListener('change', loadFile);
-  });
-  function selectImage(index) {
-    // Скрыть все images-formset
-    let allImages = document.querySelectorAll('.images__color-positive');
-    allImages.forEach(img => img.style.display = 'none');
     
-    // Показать выбранный images-formset
-    let selectedImage = document.querySelector(`.images__color-positive:nth-child(${index})`);
-    selectedImage.style.display = 'block';
-};
-</script>
 
-  
-    
+</main>    
 {% endblock content%}

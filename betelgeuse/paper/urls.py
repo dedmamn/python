@@ -5,7 +5,7 @@ urlpatterns = [
     path("", views.PaperList.as_view(), name="paper-home"),
     path("create", views.create_paper, name="paper_create"),
     # path("<int:pk>", views.PaperUpdate.as_view(), name="paper-update"),
-    path("<int:pk>", views.detail_view, name="paper-update")
+    path("<int:pk>", views.updatePaper, name="paper-update")
     # path("<int:pk>", views.updatePaper, name="paper-update"),
     # path("addPaper", views.PaperCreate.as_view(), name="paper-add"),
 ]
