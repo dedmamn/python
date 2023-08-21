@@ -30,21 +30,21 @@
         <div class="photo-and-research-area__main">
 
             <fieldset class="photo__images main__card card7">
-               {{ form.image_formset.management_form }}
-               {{ form.image_set.0.media }}
+               {{ image_formset.management_form }}
+               {{ image_formset.0.media }}
                 <div class="images__color-positive">
                     <label class="images__color-positive--title" for="color-positive">Цветной позитив</label>
-                    {{ images.0.color_positive }}
+                    {{ image_formset.0.color_positive}}
                 </div>
 
                 <div class="images__bw-positive">
                     <label class="images__bw-positive--title" for="bw-positive">Ч/б позитив</label>
-                    {{ form.image_formset.0.bw_positive }}
+                    {{ image_formset.0.bw_positive }}
                 </div>
                 
                 <div class="images__capture-date">
                     <label class="images__capture-date--title" for="Capture-date">Дата съемки</label>
-                    {{ form.image_formset.0.date_capture }}
+                    {{ image_formset.0.date_capture }}
                 </div>
             
             </fieldset>

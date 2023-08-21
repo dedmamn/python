@@ -57,9 +57,24 @@ def create_paper(request):
 def updatePaper(request, pk):
     paper = Paper.objects.get(id=pk)
     form = PaperForm(request.POST or None, instance=paper)
-    images = Image.objects.filter(paper=paper)
-    context = {"form": form, "images": images}
+    image_formset = PaperForm.image_formset(queryset=Image.objects.filter(paper=paper))
+    himImage_formset = PaperForm.himImage_formset(queryset=HimImage.objects.filter(paper=paper))
+    report_formset = PaperForm.report_formset(queryset=Report.objects.filter(paper=paper))
+    structure_formset = PaperForm.structure_formset(queryset=StructureResearch.objects.filter(paper=paper))
+    rfa_formset = PaperForm.rfa_formset(queryset=RfaResearch.objects.filter(paper=paper))
+    furie_formset = PaperForm.furie_formset(queryset=FurieResearch.objects.filter(paper=paper))
+    krs_formset = PaperForm.krs_formset(queryset=KrsResearch.objects.filter(paper=paper))
+    context = {
+        "form": form,
+        "image_formset": image_formset,
+        "himImage_formset": himImage_formset,
+        "report_formset": report_formset,
+        "structure_formset": structure_formset,
+        "rfa_formset": rfa_formset,
+        "furie_formset": furie_formset,
+        "krs_formset": krs_formset,
+    }
     if form.is_valid():
         form.save()
         return HttpResponseRedirect("/")
-    return render(request, "paper/createPaper.html", context)
+    return render(request, "paper/detailPaper.html", context)
