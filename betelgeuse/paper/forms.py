@@ -1,8 +1,9 @@
 from django import forms
 from .models import *
 from django_selectize import forms as s2forms
-from django.views.generic.edit import FormView
+from formset.views import FormView
 from image_uploader_widget.widgets import ImageUploaderWidget
+from formset.widgets import UploadedFileInput
 
 
 class ReportForm(forms.ModelForm):
@@ -18,12 +19,13 @@ class ReportForm(forms.ModelForm):
                     "name": "date",
                 }
             ),
-            "file": forms.FileInput(
+            "file": UploadedFileInput(
                 attrs={
                     "class": "reports__file--input",
                     "type": "file",
                     "id": "report",
                     "name": "report",
+                    "max-size": 1024 * 1024,
                 }
             ),
         }
@@ -236,7 +238,7 @@ class HimImageForm(forms.ModelForm):
 
 class PaperForm(forms.ModelForm):
     report_formset = forms.inlineformset_factory(Paper, Report, form=ReportForm, extra=1, can_delete_extra=False)
-    image_formset = forms.inlineformset_factory(Paper, Image, form=ImageForm, extra=2, can_delete_extra=False)
+    image_formset = forms.inlineformset_factory(Paper, Image, form=ImageForm, extra=1, can_delete_extra=False)
     structure_formset = forms.inlineformset_factory(
         Paper, StructureResearch, form=StructureResearchForm, extra=1, can_delete_extra=False
     )

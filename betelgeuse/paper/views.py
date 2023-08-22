@@ -56,16 +56,16 @@ def create_paper(request):
 
 def updatePaper(request, pk):
     paper = Paper.objects.get(id=pk)
-    form = PaperForm(request.POST or None, instance=paper)
-    image_formset = PaperForm.image_formset(queryset=Image.objects.filter(paper=paper))
-    himImage_formset = PaperForm.himImage_formset(queryset=HimImage.objects.filter(paper=paper))
-    report_formset = PaperForm.report_formset(queryset=Report.objects.filter(paper=paper))
-    structure_formset = PaperForm.structure_formset(queryset=StructureResearch.objects.filter(paper=paper))
-    rfa_formset = PaperForm.rfa_formset(queryset=RfaResearch.objects.filter(paper=paper))
-    furie_formset = PaperForm.furie_formset(queryset=FurieResearch.objects.filter(paper=paper))
-    krs_formset = PaperForm.krs_formset(queryset=KrsResearch.objects.filter(paper=paper))
+    paper_form = PaperForm(request.POST or None, instance=paper)
+    image_formset = PaperForm.image_formset(instance=paper)
+    himImage_formset = PaperForm.himImage_formset(instance=paper)
+    report_formset = PaperForm.report_formset(instance=paper)
+    structure_formset = PaperForm.structure_formset(instance=paper)
+    rfa_formset = PaperForm.rfa_formset(instance=paper)
+    furie_formset = PaperForm.furie_formset(instance=paper)
+    krs_formset = PaperForm.krs_formset(instance=paper)
     context = {
-        "form": form,
+        "form": paper_form,
         "image_formset": image_formset,
         "himImage_formset": himImage_formset,
         "report_formset": report_formset,
@@ -74,7 +74,33 @@ def updatePaper(request, pk):
         "furie_formset": furie_formset,
         "krs_formset": krs_formset,
     }
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/")
+
+    formset_names = ["report", "image", "himImage", "structure", "rfa", "furie", "krs"]
+
+    formsets = {
+        name: getattr(PaperForm, f"{name}_formset")(request.POST or None, request.FILES, instance=paper_form.instance)
+        for name in formset_names
+    }
+
+    if request.method == "POST":
+        if paper_form.is_valid():
+            paper = paper_form.save()
+
+            all_valid = True
+            for name, formset in formsets.items():
+                print(formset.has_changed())
+                is_valid = not any(request.POST.get(prefix, "") for prefix in formset.prefix) or formset.is_valid()
+                if is_valid:
+                    if formset.is_valid():
+                        formset.save()
+                    else:
+                        print(name, formset.errors)
+                        all_valid = False
+
+            if all_valid:
+                return HttpResponseRedirect("/")
+            else:
+                for formset in formsets.values():
+                    print(formset.errors)
+
     return render(request, "paper/detailPaper.html", context)
